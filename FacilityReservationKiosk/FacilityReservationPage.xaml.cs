@@ -945,7 +945,7 @@ namespace FacilityReservationKiosk
 			resGrid.Children.Add (inputPass, 75, 135, 13, 14);
 			inputPass.IsPassword =  true;
 			password = inputPass.Text;
-
+			 
 			//time
 			//from and to
 			//from time
