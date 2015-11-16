@@ -274,6 +274,7 @@ namespace FacilityReservationKiosk
 			
 		public void addViewCell () 
 		{
+			// cmment
 			for (int m = 0; m < filterList.Count; m++) {
 				ViewCell vc = new ViewCell {
 					View = new StackLayout {
