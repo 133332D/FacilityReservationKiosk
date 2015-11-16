@@ -96,12 +96,9 @@
     <Reference Include="Xamarin-Sidebar-Unified">
       <HintPath>..\Components\SidebarNavigation-1.9\lib\ios-unified\Xamarin-Sidebar-Unified.dll</HintPath>
     </Reference>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\FacilityReservationKiosk\FacilityReservationKiosk.csproj">
-      <Project>{BEE27EDF-F4B7-43CA-B5BA-CE445BD80CBC}</Project>
-      <Name>FacilityReservationKiosk</Name>
-    </ProjectReference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\portable-net40+sl5+wp80+win8+wpa81\Newtonsoft.Json.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\Default.png" />
@@ -147,5 +144,11 @@
       <Version>1.9</Version>
       <Visible>False</Visible>
     </XamarinComponentReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\FacilityReservationKiosk\FacilityReservationKiosk.csproj">
+      <Project>{BEE27EDF-F4B7-43CA-B5BA-CE445BD80CBC}</Project>
+      <Name>FacilityReservationKiosk</Name>
+    </ProjectReference>
   </ItemGroup>
 </Project>
