@@ -1,0 +1,221 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<MasterDetailPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="FacilityReservationKiosk.FacilityListingPage">
+	<MasterDetailPage.Master>
+		<ContentPage x:Name="master" Title="Master" BackgroundColor="White" Padding="0, 20, 0, 0">
+			<!--Master Page-->
+			<StackLayout>
+				<Grid>
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="10">
+						</ColumnDefinition>
+						<ColumnDefinition Width="*">
+						</ColumnDefinition>
+					</Grid.ColumnDefinitions>
+					<Grid.RowDefinitions>
+						<RowDefinition Height="50">
+						</RowDefinition>
+					</Grid.RowDefinitions>
+					<Grid.Children>
+						<BoxView Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" BackgroundColor="Navy" />
+						<Label x:Name="titlename" Grid.Row="0" Grid.Column="1" />
+					</Grid.Children>
+				</Grid>
+				<TableView x:Name="tableView">
+					<TableRoot>
+						<TableSection x:Name="blockSection" Title="NAME">
+						<!--<ListView x:Name="lvFilter">
+						<ListView.ItemTemplate>
+						<DataTemplate>-->
+<!--							<ViewCell x:Name="viewCellL">
+							<ViewCell.View>-->
+								<!---<ListView x:Name="viewCellListView">
+								    <ListView.ItemTemplate>
+								      <DataTemplate>
+								        <ViewCell>
+								     
+										<Label x:Name="filterName" Text="{Binding filterName}" WidthRequest="250" YAlign="Center" Grid.Row="0" Grid.Column="1">
+										</Label>
+										<Image x:Name="ImageL" Source="check_mark.jpg" Grid.Row="0" Grid.Column="2">
+										</Image>
+
+																		    
+								        </ViewCell>
+								      </DataTemplate>
+								    </ListView.ItemTemplate>
+								</ListView>-->
+								<!---<StackLayout Orientation="Horizontal" HorizontalOptions="Start">-->
+
+									<!---<Grid>
+										<Grid.ColumnDefinitions>
+											<ColumnDefinition Width="10">
+											</ColumnDefinition>
+											<ColumnDefinition Width="250">
+											</ColumnDefinition>
+											<ColumnDefinition Width="*">
+											</ColumnDefinition>
+										</Grid.ColumnDefinitions>-->
+
+									<!---</Grid>-->
+								<!--</StackLayout>-->
+<!--								</ViewCell.View>
+							</ViewCell>-->
+<!--							</DataTemplate>
+							</ListView.ItemTemplate>
+							</ListView>-->
+						</TableSection>
+						<TableSection Title="DATE">
+						<ViewCell x:Name="viewCellD">
+							<ViewCell.View>
+							<StackLayout Orientation="Horizontal">
+									<Grid>
+										<Grid.ColumnDefinitions>
+											<ColumnDefinition Width="10">
+											</ColumnDefinition>
+											<ColumnDefinition Width="250">
+											</ColumnDefinition>
+											<ColumnDefinition Width="*">
+											</ColumnDefinition>
+										</Grid.ColumnDefinitions>
+										<Label x:Name="lbl_today" Text="Today" YAlign="Center" Grid.Row="0" Grid.Column="1">
+										</Label>
+										<Image x:Name="checkToday" Source="check_mark.jpg" Grid.Row="0" Grid.Column="2">
+										</Image>
+									</Grid>
+								</StackLayout>
+								</ViewCell.View>
+							</ViewCell>
+							<EntryCell x:Name = "entry" Label = " Date" Placeholder = "Eg. 13-Aug-2015" Keyboard = "Numeric"></EntryCell>
+						</TableSection>
+						<TableSection Title="AVAILABILITY">
+						<ViewCell x:Name="viewCellA">
+							<ViewCell.View>
+							<StackLayout Orientation="Horizontal">
+									<Grid>
+										<Grid.ColumnDefinitions>
+											<ColumnDefinition Width="10">
+											</ColumnDefinition>
+											<ColumnDefinition Width="250">
+											</ColumnDefinition>
+											<ColumnDefinition Width="*">
+											</ColumnDefinition>
+										</Grid.ColumnDefinitions>
+										<Label x:Name="lbl_All" Text="All" YAlign="Center" Grid.Row="0" Grid.Column="1">
+										</Label>
+										<Image x:Name="checkAll" Source="check_mark.jpg" Grid.Row="0" Grid.Column="2">
+										</Image>
+									</Grid>
+								</StackLayout>
+								</ViewCell.View>
+							</ViewCell>
+						</TableSection>
+					</TableRoot>
+				</TableView>
+			</StackLayout>
+		</ContentPage>
+	</MasterDetailPage.Master>
+	<MasterDetailPage.Detail>
+		<!--Detail Page-->
+		<!-- add padding to not overlap stats bar-->
+		<ContentPage Title="Detail" BackgroundColor="White" Padding="0, 20, 0, 0">
+			<StackLayout>
+				<!--top header-->
+				<Grid>
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="70">
+						</ColumnDefinition>
+						<ColumnDefinition Width="*">
+						</ColumnDefinition>
+						<ColumnDefinition Width="210">
+						</ColumnDefinition>
+					</Grid.ColumnDefinitions>
+					<Grid.RowDefinitions>
+						<RowDefinition Height="70">
+						</RowDefinition>
+					</Grid.RowDefinitions>
+					<Grid.Children>
+						<!---aqua background-->
+						<BoxView Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" BackgroundColor="Aqua" />
+						<Button x:Name="filterButton" Grid.Row="0" Grid.Column="0">
+						</Button>
+						<Label x:Name="title" Grid.Row="0" Grid.Column="1" TextColor="Black">
+						</Label>
+						<Label x:Name="appName" Grid.Row="0" Grid.Column="2" TextColor="Black">
+						</Label>
+					</Grid.Children>
+				</Grid>
+				<!--to display the timings (8am, 9am etc)-->
+				<Grid RowSpacing = "0" Padding = "0, 0, 0, -8">
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="25">
+						</ColumnDefinition>
+						<ColumnDefinition Width="*">
+						</ColumnDefinition>
+						<ColumnDefinition Width="53">
+						</ColumnDefinition>
+						<ColumnDefinition Width="53">
+						</ColumnDefinition>
+						<ColumnDefinition Width="53">
+						</ColumnDefinition>
+						<ColumnDefinition Width="53">
+						</ColumnDefinition>
+						<ColumnDefinition Width="53">
+						</ColumnDefinition>
+						<ColumnDefinition Width="53">
+						</ColumnDefinition>
+						<ColumnDefinition Width="53">
+						</ColumnDefinition>
+						<ColumnDefinition Width="53">
+						</ColumnDefinition>
+						<ColumnDefinition Width="53">
+						</ColumnDefinition>
+						<ColumnDefinition Width="53">
+						</ColumnDefinition>
+						<ColumnDefinition Width="53">
+						</ColumnDefinition>
+						<ColumnDefinition Width="3">
+						</ColumnDefinition>
+					</Grid.ColumnDefinitions>
+					<Grid.RowDefinitions>
+						<RowDefinition Height="26">
+						</RowDefinition>
+					</Grid.RowDefinitions>
+					<Grid.Children>
+						<Label Text="8am" Grid.Row="0" Grid.Column="2" TextColor="Black" FontAttributes="Bold" />
+						<Label Text="9am" Grid.Row="0" Grid.Column="3" TextColor="Black" FontAttributes="Bold" />
+						<Label Text="10am" Grid.Row="0" Grid.Column="4" TextColor="Black" FontAttributes="Bold" />
+						<Label Text="11am" Grid.Row="0" Grid.Column="5" TextColor="Black" FontAttributes="Bold" />
+						<Label Text="12nn" Grid.Row="0" Grid.Column="6" TextColor="Black" FontAttributes="Bold" />
+						<Label Text="1pm" Grid.Row="0" Grid.Column="7" TextColor="Black" FontAttributes="Bold" />
+						<Label Text="2pm" Grid.Row="0" Grid.Column="8" TextColor="Black" FontAttributes="Bold" />
+						<Label Text="3pm" Grid.Row="0" Grid.Column="9" TextColor="Black" FontAttributes="Bold" />
+						<Label Text="4pm" Grid.Row="0" Grid.Column="10" TextColor="Black" FontAttributes="Bold" />
+						<Label Text="5pm" Grid.Row="0" Grid.Column="11" TextColor="Black" FontAttributes="Bold" />
+						<Label Text="6pm" Grid.Row="0" Grid.Column="12" TextColor="Black" FontAttributes="Bold" />
+					</Grid.Children>
+				</Grid>
+				<Grid x:Name="boxGrid" Padding = "0, 0, 0, -6">
+						<Grid.ColumnDefinitions>
+						</Grid.ColumnDefinitions>
+						<Grid.RowDefinitions>
+						</Grid.RowDefinitions>
+						<!--add rows and children in FacilityListingPage.xaml.cs -->
+						<Grid.Children>
+						</Grid.Children>
+					</Grid>
+				<!--create a list of facility and loop with each gridview-->
+				<!--to show the bookings of each facility-->
+				<ScrollView>
+					<Grid x:Name="facGrid">
+						<Grid.ColumnDefinitions>
+						</Grid.ColumnDefinitions>
+						<Grid.RowDefinitions>
+						</Grid.RowDefinitions>
+						<!--add rows and children in FacilityListingPage.xaml.cs -->
+						<Grid.Children>
+						</Grid.Children>
+					</Grid>
+				</ScrollView>
+			</StackLayout>
+		</ContentPage>
+	</MasterDetailPage.Detail>
+</MasterDetailPage>

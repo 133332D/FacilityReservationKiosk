@@ -1,0 +1,130 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="FacilityReservationKiosk.FacilityDetailsPage" BackgroundColor="White" Padding="0, 20, 0, 0">
+	<ContentPage.Content>
+		<StackLayout>
+			<!--top header-->
+			<Grid x:Name="header" Padding="0,0,0,0">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="70">
+					</ColumnDefinition>
+					<ColumnDefinition Width="*">
+					</ColumnDefinition>
+					<ColumnDefinition Width="210">
+					</ColumnDefinition>
+				</Grid.ColumnDefinitions>
+				<Grid.RowDefinitions>
+					<RowDefinition Height="70">
+					</RowDefinition>
+				</Grid.RowDefinitions>
+				<Grid.Children>
+					<!---aqua background-->
+					<BoxView Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" BackgroundColor="Aqua" />
+					<Button x:Name="arrowButton" Grid.Row="0" Grid.Column="0">
+					</Button>
+					<Label x:Name="title" Grid.Row="0" Grid.Column="1" TextColor="Black">
+					</Label>
+					<Label x:Name="appName" Grid.Row="0" Grid.Column="2" TextColor="Black">
+					</Label>
+				</Grid.Children>
+			</Grid>
+			<!--L.421 reserved-->
+			<Grid x:Name="status" Padding="0,-6,0,0">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="100">
+					</ColumnDefinition>
+					<ColumnDefinition Width="*">
+					</ColumnDefinition>
+					<ColumnDefinition Width="300">
+					</ColumnDefinition>
+				</Grid.ColumnDefinitions>
+				<Grid.RowDefinitions>
+					<RowDefinition Height="90">
+					</RowDefinition>
+				</Grid.RowDefinitions>
+				<Grid.Children>
+					<!---aqua background-->
+					<BoxView x:Name="box" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" />
+					<Label x:Name="facName" Grid.Row="0" Grid.Column="1" TextColor="Black">
+					</Label>
+					<Label x:Name="reserve" Grid.Row="0" Grid.Column="2" TextColor="Black">
+					</Label>
+				</Grid.Children>
+			</Grid>
+			<Grid x:Name="timeline">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="100">
+					</ColumnDefinition>
+					<ColumnDefinition Width="200">
+					</ColumnDefinition>
+					<ColumnDefinition Width="*">
+					</ColumnDefinition>
+				</Grid.ColumnDefinitions>
+				<Grid.RowDefinitions>
+				</Grid.RowDefinitions>
+			</Grid>
+			<!--to display the timings (8am, 9am etc)-->
+			<Grid RowSpacing="0" Padding="0, 25, 0, -8">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="60">
+					</ColumnDefinition>
+					<ColumnDefinition Width="53">
+					</ColumnDefinition>
+					<ColumnDefinition Width="53">
+					</ColumnDefinition>
+					<ColumnDefinition Width="53">
+					</ColumnDefinition>
+					<ColumnDefinition Width="53">
+					</ColumnDefinition>
+					<ColumnDefinition Width="53">
+					</ColumnDefinition>
+					<ColumnDefinition Width="53">
+					</ColumnDefinition>
+					<ColumnDefinition Width="53">
+					</ColumnDefinition>
+					<ColumnDefinition Width="53">
+					</ColumnDefinition>
+					<ColumnDefinition Width="53">
+					</ColumnDefinition>
+					<ColumnDefinition Width="53">
+					</ColumnDefinition>
+					<ColumnDefinition Width="53">
+					</ColumnDefinition>
+				</Grid.ColumnDefinitions>
+				<Grid.RowDefinitions>
+					<RowDefinition Height="26">
+					</RowDefinition>
+				</Grid.RowDefinitions>
+				<Grid.Children>
+					<Label Text="8am" Grid.Row="0" Grid.Column="1" TextColor="Black" FontAttributes="Bold" />
+					<Label Text="9am" Grid.Row="0" Grid.Column="2" TextColor="Black" FontAttributes="Bold" />
+					<Label Text="10am" Grid.Row="0" Grid.Column="3" TextColor="Black" FontAttributes="Bold" />
+					<Label Text="11am" Grid.Row="0" Grid.Column="4" TextColor="Black" FontAttributes="Bold" />
+					<Label Text="12nn" Grid.Row="0" Grid.Column="5" TextColor="Black" FontAttributes="Bold" />
+					<Label Text="1pm" Grid.Row="0" Grid.Column="6" TextColor="Black" FontAttributes="Bold" />
+					<Label Text="2pm" Grid.Row="0" Grid.Column="7" TextColor="Black" FontAttributes="Bold" />
+					<Label Text="3pm" Grid.Row="0" Grid.Column="8" TextColor="Black" FontAttributes="Bold" />
+					<Label Text="4pm" Grid.Row="0" Grid.Column="9" TextColor="Black" FontAttributes="Bold" />
+					<Label Text="5pm" Grid.Row="0" Grid.Column="10" TextColor="Black" FontAttributes="Bold" />
+					<Label Text="6pm" Grid.Row="0" Grid.Column="11" TextColor="Black" FontAttributes="Bold" />
+				</Grid.Children>
+			</Grid>
+			<Grid x:Name="boxGrid" Padding="0, 0, 0, -6">
+				<Grid.ColumnDefinitions>
+				</Grid.ColumnDefinitions>
+				<Grid.RowDefinitions>
+				</Grid.RowDefinitions>
+				<!--add rows and children in FacilityListingPage.xaml.cs -->
+				<Grid.Children>
+				</Grid.Children>
+			</Grid>
+			<Grid x:Name="lineGrid" Padding="0, 0, 0, 10">
+				<Grid.ColumnDefinitions>
+				</Grid.ColumnDefinitions>
+				<Grid.RowDefinitions>
+				</Grid.RowDefinitions>
+			</Grid>
+			<Label Text="Tap to reserve the time slots" XAlign="Center" FontAttributes="Bold">
+			</Label>
+		</StackLayout>
+	</ContentPage.Content>
+</ContentPage>
