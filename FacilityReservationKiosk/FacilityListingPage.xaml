@@ -3,7 +3,7 @@
 	<MasterDetailPage.Master>
 		<ContentPage x:Name="master" Title="Master" BackgroundColor="White" Padding="0, 20, 0, 0">
 			<!--Master Page-->
-			<StackLayout>
+			<StackLayout x:Name="stackLayout">
 				<Grid>
 					<Grid.ColumnDefinitions>
 						<ColumnDefinition Width="10">
@@ -103,6 +103,7 @@
 										</Label>
 										<Image x:Name="checkAll" Source="check_mark.jpg" Grid.Row="0" Grid.Column="2">
 										</Image>
+
 									</Grid>
 								</StackLayout>
 								</ViewCell.View>

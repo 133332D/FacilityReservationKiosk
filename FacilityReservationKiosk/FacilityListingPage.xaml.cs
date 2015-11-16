@@ -207,11 +207,14 @@ namespace FacilityReservationKiosk
 
 		void TapL_Tapped ()
 		{
+			
+			//if( == "Block L Level 2"){
 			block = "L";
 			//ImageL.Opacity = 1;
 			//ImageM.Opacity = 0;
 			this.SetValue(MasterDetailPage.IsPresentedProperty,(object) false);
 			//Navigation.PushModalAsync (new FacilityListingPage ());
+			//}
 		}
 
 		void TapM_Tapped (object sender, EventArgs e)
@@ -272,10 +275,27 @@ namespace FacilityReservationKiosk
 			}
 		}
 			
+		List<Image> filterImages = new List<Image>();
+
 		public void addViewCell () 
 		{
+			filterImages.Clear ();
 			// cmment
 			for (int m = 0; m < filterList.Count; m++) {
+				var f = filterList [m];
+
+				var image = new Image () {
+					Source = FileImageSource.FromFile ("check_mark.jpg"),
+					HorizontalOptions = LayoutOptions.EndAndExpand
+				};
+				filterImages.Add (image);
+
+				//default filter
+				for (int k = 0; k < filterImages.Count; k++){
+					filterImages[k].Opacity = 0;
+				}
+				filterImages [0].Opacity = 1;
+
 				ViewCell vc = new ViewCell {
 					View = new StackLayout {
 						Orientation = StackOrientation.Horizontal,
@@ -285,15 +305,21 @@ namespace FacilityReservationKiosk
 								Text = "   " + filterList[m].filterName,
 								YAlign = TextAlignment.Center,
 								GestureRecognizers = {
-									new TapGestureRecognizer(){
-										Command = new Command(TapL_Tapped)
+									new TapGestureRecognizer() {
+										Command = new Command(() => { 
+											block = f.block;
+											level = f.level;
+											for (int k = 0; k < filterImages.Count; k++){
+												filterImages[k].Opacity = 0;
+											}
+											image.Opacity = 1;
+											GetFacilityTable();
+											this.SetValue(MasterDetailPage.IsPresentedProperty,(object) false);
+										}),
 									}
 								}
 							},
-							new Image () {
-								Source = FileImageSource.FromFile("check_mark.jpg"),
-								HorizontalOptions = LayoutOptions.EndAndExpand
-							}
+							image
 						}
 					}
 				};
@@ -301,42 +327,19 @@ namespace FacilityReservationKiosk
 			}
 		}
 
-		//observable
-//		public class FilterItem: INotifyPropertyChanged 
-//		{
-//			public event PropertyChangedEventHandler PropertyChanged;
-//
-//			string _filterName;
-//			
-//							public FilterItem(string filterName){
-//								this._filterName = filterName;
-//							}
-//
-//			public string FilterName 
-//			{
-//				get { 
-//					return _filterName;
-//				}
-//
-//				set {
-//					SetProperty (ref _filterName, value);
-//				}
-//			}
-//
-//			private void SetProperty<T> (ref T backingField, T newValue,[CallerMemberName] string propertyName = null)
-//			{
-//				if (EqualityComparer<T>.Default.Equals(backingField, newValue)) {
-//					//backingField = newValue;
-//				}
-//
-//					if (PropertyChanged!=null)
-//						PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-//			}
-//		}
-
 		//method to call** to run the grid loop
 		public void GetFacilityTable ()
 		{
+			//activity indicator
+			var activityIndicator = new ActivityIndicator();
+			activityIndicator.IsRunning = true;
+			activityIndicator.IsVisible = true;
+			activityIndicator.BindingContext = this;
+			activityIndicator.SetBinding (ActivityIndicator.IsVisibleProperty, "IsBusy");
+			this.IsBusy = true;
+
+			stackLayout.Children.Add (activityIndicator);
+
 			facilityList = new List<FacObject> ();
 		
 			facGrid.Children.Clear ();
@@ -617,6 +620,10 @@ namespace FacilityReservationKiosk
 				}
 			
 			}
+
+			activityIndicator.IsRunning = false;
+			activityIndicator.IsVisible = false;
+			this.IsBusy = false;
 		}
 
 		public FacilityListingPage ()
