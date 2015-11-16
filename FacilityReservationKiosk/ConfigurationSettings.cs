@@ -11,7 +11,7 @@ namespace FacilityReservationKiosk
 
 		public ConfigurationSettings ()
 		{
-			
+			// test
 		}
 	}
 }
