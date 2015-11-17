@@ -580,7 +580,6 @@ namespace FacilityReservationKiosk
 			//entry input of userid
 			Entry inputID = new Entry ();
 			resGrid.Children.Add (inputID, 75, 123, 11, 12);
-			userID = inputID.Text;
 
 			//password
 			resGrid.Children.Add (new Label {
@@ -595,13 +594,45 @@ namespace FacilityReservationKiosk
 			Entry inputPass = new Entry ();
 			resGrid.Children.Add (inputPass, 75, 135, 13, 14);
 			inputPass.IsPassword =  true;
-			password = inputPass.Text;
 
 			//button
 			Button bookBut = new Button { Text="Confirm", BackgroundColor = Color.White };
 			resGrid.Children.Add (bookBut, 147, 192, 15, 16);
 
-			bookBut.Clicked += BookBut_Clicked;
+			bookBut.Clicked += (object sender, EventArgs e) => {
+
+				userID = inputID.Text;
+				password = inputPass.Text;
+
+				//check user
+				if (userID == "133332D" && password == "S9631672J") {
+					string status;
+					string message;
+					//url
+					//facilityReservationID
+					string urlCancel = ConfigurationSettings.urliPad + "CancelReservation.aspx?UserID=" + userID
+						+ "&FacilityReservationID=" + "2015B0030989" + "&Reason=" + reason;
+
+					//to get all the reservations and insert to an c# object
+					using (var client3 = new HttpClient ()) {
+						HttpResponseMessage responseMsg3 = client3.GetAsync (urlCancel).Result;
+
+						var json3 = responseMsg3.Content.ReadAsStringAsync ();
+						json3.Wait ();
+						string jsonString = json3.Result.ToString ();
+						//ReservationList list2 = JsonConvert.DeserializeObject<ReservationList> (json3.Result);
+						var obj = JObject.Parse (jsonString);
+						status = (string)obj.SelectToken ("Result");
+						message = (string)obj.SelectToken ("Message");
+					}
+
+					if (status == "OK") {
+						DisplayAlert ("Reservation", "Cancellation was sucessful!", "OK");
+					} else {
+						DisplayAlert ("Error", message, "OK");
+					}
+				}
+			};
 
 			Button cancelBut = new Button { Text="Cancel", BackgroundColor = Color.White 	};
 			resGrid.Children.Add (cancelBut, 195, 240, 15, 16);
@@ -612,37 +643,6 @@ namespace FacilityReservationKiosk
 		void CancelBut_Clicked (object sender, EventArgs e)
 		{
 			Navigation.PopModalAsync (true);
-		}
-
-		void BookBut_Clicked (object sender, EventArgs e)
-		{
-			//check user
-			if (userID == "133332D" && password == "S9631672J") {
-				string status;
-				string message;
-				//url
-				string urlCancel = ConfigurationSettings.urliPad + "CancelReservation.aspx?UserID=" + userID
-				                  + "&FacilityReservationID=" + facilityReservationID + "&Reason=" + reason;
-
-				//to get all the reservations and insert to an c# object
-				using (var client3 = new HttpClient ()) {
-					HttpResponseMessage responseMsg3 = client3.GetAsync (urlCancel).Result;
-
-					var json3 = responseMsg3.Content.ReadAsStringAsync ();
-					json3.Wait ();
-					string jsonString = json3.Result.ToString ();
-					//ReservationList list2 = JsonConvert.DeserializeObject<ReservationList> (json3.Result);
-					var obj = JObject.Parse (jsonString);
-					status = (string)obj.SelectToken ("Result");
-					message = (string)obj.SelectToken ("Message");
-				}
-
-				if (status == "OK") {
-					DisplayAlert ("Reservation", "Cancellation was sucessful!", "OK");
-				} else {
-					DisplayAlert ("Error", "Please try again!", "OK");
-				}
-			}
 		}
 	}
 }

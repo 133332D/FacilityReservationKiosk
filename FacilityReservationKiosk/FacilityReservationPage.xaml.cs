@@ -929,7 +929,6 @@ namespace FacilityReservationKiosk
 			//entry input of purpose
 			Entry inputID = new Entry ();
 			resGrid.Children.Add (inputID, 75, 123, 11, 12);
-			userID = inputID.Text;
 
 			//password
 			resGrid.Children.Add (new Label {
@@ -944,7 +943,6 @@ namespace FacilityReservationKiosk
 			Entry inputPass = new Entry ();
 			resGrid.Children.Add (inputPass, 75, 135, 13, 14);
 			inputPass.IsPassword =  true;
-			password = inputPass.Text;
 			 
 			//time
 			//from and to
@@ -964,20 +962,24 @@ namespace FacilityReservationKiosk
 			resGrid.Children.Add (totimepick, 173, 210, 5, 6);
 			etime = totimepick.Time.ToString ();
 
-			startDateTime = Convert.ToDateTime (sDate + " " + stime).ToString ("dd-MMM-yyyy HH:MM");
-			endDateTime = Convert.ToDateTime (eDate + " " + etime).ToString("dd-MMM-yyyy HH:MM");
+			startDateTime = Convert.ToDateTime (sDate + " " + stime).ToString ("dd-MMM-yyyy HH:mm");
+			endDateTime = Convert.ToDateTime (eDate + " " + etime).ToString("dd-MMM-yyyy HH:mm");
 
 			//button
 			Button bookBut = new Button { Text="Confirm", BackgroundColor = Color.White };
 			bookBut.Clicked += (object sender, EventArgs e) => 
 			{
+				userID = inputID.Text;
+				password = inputPass.Text;
+
 				if (userID == "133332D" && password == "S9631672J") {
 					string status;
 					string message;
 
 					//url
+					//passFacilityID startDateTime endDateTime
 					string urlMake = ConfigurationSettings.urliPad + "CreateReservation.aspx?UserType=" + "&UserID=" + userID
-						+ "&FacilityID=" + passFacilityID + "&StartDateTime=" + startDateTime + "&EndDateTime=" + endDateTime
+						+ "&FacilityID=" + "L.403" + "&StartDateTime=" + "18-Nov-2015 16:00" + "&EndDateTime=" + "18-Nov-2015 17:00"
 						+ "&Description=" + purpose;
 
 					//to get all the reservations and insert to an c# object
@@ -991,13 +993,16 @@ namespace FacilityReservationKiosk
 						var obj = JObject.Parse (jsonString);
 						status = (string)obj.SelectToken ("Result");
 						message = (string)obj.SelectToken ("Message");
-					}
 
+					}
 					if (status == "OK") {
 						DisplayAlert ("Reservation", "Booking was sucessful!", "OK");
+						Navigation.PushModalAsync(new FacilityListingPage());
+
 					} else {
-						DisplayAlert ("Error", "Please try again!", "OK");
-					}
+						DisplayAlert ("Error", message, "OK");
+						Navigation.PopModalAsync(true);
+					}	
 				}
 			};
 			resGrid.Children.Add (bookBut, 147, 192, 15, 16);
