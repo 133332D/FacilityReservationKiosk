@@ -107,7 +107,7 @@
 								</StackLayout>
 								</ViewCell.View>
 							</ViewCell>
-							<ViewCell x:Name="viewCell89">
+<!--							<ViewCell x:Name="viewCell89">
 							<ViewCell.View>
 							<StackLayout Orientation="Horizontal">
 									<Grid>
@@ -119,14 +119,14 @@
 											<ColumnDefinition Width="*">
 											</ColumnDefinition>
 										</Grid.ColumnDefinitions>
-										<Label x:Name="lbl_eightnine" Text="8am to 9am" YAlign="Center" Grid.Row="0" Grid.Column="1">
+										<Label x:Name="lbl_eightnine" Text="8AM to 9AM" YAlign="Center" Grid.Row="0" Grid.Column="1">
 										</Label>
 										<Image x:Name="checkmark" Source="check_mark.jpg" Grid.Row="0" Grid.Column="2">
 										</Image>
 									</Grid>
 								</StackLayout>
 								</ViewCell.View>
-							</ViewCell>
+							</ViewCell>-->
 						</TableSection>
 					</TableRoot>
 				</TableView>
