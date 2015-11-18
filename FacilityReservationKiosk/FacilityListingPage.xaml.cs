@@ -39,6 +39,8 @@ namespace FacilityReservationKiosk
 		int linestart, boxstart;
 		string dateTiming;
 
+		//activity indicator
+
 		class FacObject
 		{
 			public string facilityID { get; set; }
@@ -330,15 +332,20 @@ namespace FacilityReservationKiosk
 		//method to call** to run the grid loop
 		public void GetFacilityTable ()
 		{
-			//activity indicator
-			var activityIndicator = new ActivityIndicator();
-			activityIndicator.IsRunning = true;
-			activityIndicator.IsVisible = true;
-			activityIndicator.BindingContext = this;
-			activityIndicator.SetBinding (ActivityIndicator.IsVisibleProperty, "IsBusy");
-			this.IsBusy = true;
+			//get datetime of today
+			string dateToday = DateTime.Today.ToString ("D");
 
-			stackLayout.Children.Add (activityIndicator);
+			//set the label eg. School Of IT, level 4
+			//set based on filter***
+			title.Text = "School Of IT, Level " + level + "\n" + dateToday;
+			title.FontAttributes = FontAttributes.Bold;
+
+			//activity indicator
+//			activityIndicator.IsRunning = true;
+//			activityIndicator.IsVisible = true;
+//			activityIndicator.BindingContext = this;
+//			activityIndicator.SetBinding (ActivityIndicator.IsVisibleProperty, "IsBusy");
+//			this.IsBusy = true;
 
 			facilityList = new List<FacObject> ();
 		
@@ -621,9 +628,9 @@ namespace FacilityReservationKiosk
 			
 			}
 
-			activityIndicator.IsRunning = false;
-			activityIndicator.IsVisible = false;
-			this.IsBusy = false;
+//			activityIndicator.IsRunning = false;
+//			activityIndicator.IsVisible = false;
+//			this.IsBusy = false;
 		}
 
 		public FacilityListingPage ()
@@ -664,6 +671,12 @@ namespace FacilityReservationKiosk
 
 			entry.Tapped += (object sender, EventArgs e) => 
 				checkToday.Opacity = 0;
+			entry.Completed += (object sender, EventArgs e) => {
+				date = entry.Text;
+				GetFacilityTable();
+				checkToday.Opacity = 0;
+				this.SetValue(MasterDetailPage.IsPresentedProperty,(object) false);
+			};
 
 			//availability
 			var alltap = new TapGestureRecognizer ();
@@ -675,13 +688,6 @@ namespace FacilityReservationKiosk
 			appName.Text = "Facility Reservation Kiosk";
 			appName.FontAttributes = FontAttributes.Bold;
 
-			//get datetime of today
-			string dateToday = DateTime.Today.ToString ("D");
-
-			//set the label eg. School Of IT, level 4
-			//set based on filter***
-			title.Text = "School Of IT, Level " + level + "\n" + dateToday;
-			title.FontAttributes = FontAttributes.Bold;
 
 			//filter button to filter the list of facility
 			filterButton.Image = "filter.png";

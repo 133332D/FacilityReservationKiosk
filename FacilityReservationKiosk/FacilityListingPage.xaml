@@ -255,6 +255,7 @@
 						</Grid.Children>
 					</Grid>
 				</ScrollView>
+<!--				<ActivityIndicator x:Name = "activityIndicator" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"/>-->
 			</StackLayout>
 		</ContentPage>
 	</MasterDetailPage.Detail>
