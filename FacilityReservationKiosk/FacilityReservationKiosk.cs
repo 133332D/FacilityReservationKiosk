@@ -8,6 +8,8 @@ namespace FacilityReservationKiosk
 	{
 		public static FacilityListingPage facilityListingPage = new FacilityListingPage();
 
+		public static IHardware Hardware;
+
 		public App ()
 		{
 			// The root page of your application
@@ -17,6 +19,7 @@ namespace FacilityReservationKiosk
 			//MainPage = new FacilityDetailsPage();
 			//MainPage = new FacilityReservationPage();
 			//MainPage = new FacilityCancelPage("L.424");
+			//MainPage = new DisplayPage();
 		}
 
 		protected override void OnStart ()
