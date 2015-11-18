@@ -125,6 +125,8 @@
 			</Grid>
 			<Label Text="Tap to reserve the time slots" XAlign="Center" FontAttributes="Bold">
 			</Label>
+			<!-- create to put image, edit padding-->
+
 		</StackLayout>
 	</ContentPage.Content>
 </ContentPage>
