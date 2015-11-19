@@ -8,7 +8,7 @@ namespace FacilityReservationKiosk
 	{
 		public static FacilityListingPage facilityListingPage = new FacilityListingPage();
 
-		public static IHardware Hardware;
+		//public static IHardware Hardware;
 
 		public App ()
 		{

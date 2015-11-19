@@ -311,6 +311,7 @@ namespace FacilityReservationKiosk
 										Command = new Command(() => { 
 											block = f.block;
 											level = f.level;
+											name = f.name;
 											for (int k = 0; k < filterImages.Count; k++){
 												filterImages[k].Opacity = 0;
 											}
@@ -349,13 +350,16 @@ namespace FacilityReservationKiosk
 
 			facilityList = new List<FacObject> ();
 		
+			facGrid.IsVisible = false;
 			facGrid.Children.Clear ();
 			facGrid.RowDefinitions.Clear ();
-			facGrid.ColumnDefinitions.Clear ();
+			//facGrid.ColumnDefinitions.Clear ();
+			facGrid.IsVisible = true;
 
-			//call webservice to get facility and reservation*
 			//string urlFac = @"http://crowd.sit.nyp.edu.sg/FRSIPad/GetFacilities.aspx?DepartmentID=" + departmentID
 			//+ "&Block=" + block + "&Level=" + level + "&Name=" + name + "&DeviceID=&Hash=";
+
+			//call webservice to get facility and reservation*
 			string urlFac = ConfigurationSettings.urliPad + "GetFacilities.aspx?DepartmentID=" + departmentID
 			                + "&Block=" + block + "&Level=" + level + "&Name=" + name + "&DeviceID=&Hash=";
 
@@ -366,16 +370,14 @@ namespace FacilityReservationKiosk
 			using (var client = new HttpClient ()) {
 				HttpResponseMessage responseMsg = client.GetAsync (urlFac).Result;
 
-				//var json = client.GetStringAsync(string.Format(url));
 				var json = responseMsg.Content.ReadAsStringAsync ();
 				json.Wait ();
 				FacilityList list = JsonConvert.DeserializeObject<FacilityList> (json.Result);
-				//List<Facility> list = JsonConvert.DeserializeObject<List<Facility>>(json.ToString());
 
 				foreach (Facility fac in list.Facilities) {
 					FacObject facObject = new FacObject (fac.facilityID, fac.departmentID, fac.description, fac.block,
-						                      fac.level, fac.name, fac.openHours, fac.closeHours, fac.maxBkTime, fac.maxBkUnits, fac.minBkTime,
-						                      fac.maxBkUnits);
+						                      fac.level, fac.name, fac.openHours, fac.closeHours, fac.maxBkTime, 
+												fac.maxBkUnits, fac.minBkTime, fac.maxBkUnits);
 					facilityList.Add (facObject);
 				}
 			}
@@ -384,9 +386,11 @@ namespace FacilityReservationKiosk
 			using (var client2 = new HttpClient ()) {
 				HttpResponseMessage responseMsg2 = client2.GetAsync (urlRes).Result;
 
+				//var json = client.GetStringAsync(string.Format(url));
 				var json2 = responseMsg2.Content.ReadAsStringAsync ();
 				json2.Wait ();
 				ReservationList list2 = JsonConvert.DeserializeObject<ReservationList> (json2.Result);
+				//List<Facility> list = JsonConvert.DeserializeObject<List<Facility>>(json.ToString());
 
 				foreach (Reservation res in list2.Reservations) {
 					ResObject resObject = new ResObject (res.facilityReservationID, res.facilityID, res.startDateTime, res.endDateTime,
@@ -397,63 +401,71 @@ namespace FacilityReservationKiosk
 
 			//create new rows and column for the grid
 			facGrid.RowDefinitions = new RowDefinitionCollection ();
-			facGrid.ColumnDefinitions = new ColumnDefinitionCollection ();
 
-			//create the columns
-			//0,1,2
-			facGrid.ColumnDefinitions.Add (new ColumnDefinition { Width = new GridLength (10, GridUnitType.Absolute) });
-			facGrid.ColumnDefinitions.Add (new ColumnDefinition { Width = new GridLength (20, GridUnitType.Absolute) });
-			facGrid.ColumnDefinitions.Add (new ColumnDefinition { Width = new GridLength (1, GridUnitType.Star) });
+			if (facGrid.ColumnDefinitions.Count == 0) {
+				facGrid.ColumnDefinitions = new ColumnDefinitionCollection ();
 
-			//column with interval of 5 minutes
-			facGrid.ColumnSpacing = 0;
+				//create the columns
+				//0,1,2
+				facGrid.ColumnDefinitions.Add (new ColumnDefinition { Width = new GridLength (10, GridUnitType.Absolute) });
+				facGrid.ColumnDefinitions.Add (new ColumnDefinition { Width = new GridLength (20, GridUnitType.Absolute) });
+				facGrid.ColumnDefinitions.Add (new ColumnDefinition { Width = new GridLength (1, GridUnitType.Star) });
 
-			for (int k = 0; k < 10; k++) { 
-				//00
+				//column with interval of 5 minutes
+				facGrid.ColumnSpacing = 0;
+
+				for (int k = 0; k < 10; k++) { 
+					//00
+					facGrid.ColumnDefinitions.Add (new ColumnDefinition { Width = new GridLength (1, GridUnitType.Absolute) });
+					facGrid.ColumnDefinitions.Add (new ColumnDefinition { Width = new GridLength (4, GridUnitType.Absolute) });
+					facGrid.ColumnDefinitions.Add (new ColumnDefinition { Width = new GridLength (1, GridUnitType.Absolute) });
+					facGrid.ColumnDefinitions.Add (new ColumnDefinition { Width = new GridLength (4, GridUnitType.Absolute) });
+					facGrid.ColumnDefinitions.Add (new ColumnDefinition { Width = new GridLength (1, GridUnitType.Absolute) });
+					facGrid.ColumnDefinitions.Add (new ColumnDefinition { Width = new GridLength (4, GridUnitType.Absolute) });
+					//15
+					facGrid.ColumnDefinitions.Add (new ColumnDefinition { Width = new GridLength (1, GridUnitType.Absolute) });
+					facGrid.ColumnDefinitions.Add (new ColumnDefinition { Width = new GridLength (4, GridUnitType.Absolute) });
+					facGrid.ColumnDefinitions.Add (new ColumnDefinition { Width = new GridLength (1, GridUnitType.Absolute) });
+					facGrid.ColumnDefinitions.Add (new ColumnDefinition { Width = new GridLength (4, GridUnitType.Absolute) });
+					facGrid.ColumnDefinitions.Add (new ColumnDefinition { Width = new GridLength (1, GridUnitType.Absolute) });
+					facGrid.ColumnDefinitions.Add (new ColumnDefinition { Width = new GridLength (4, GridUnitType.Absolute) });
+					//30
+					facGrid.ColumnDefinitions.Add (new ColumnDefinition { Width = new GridLength (1, GridUnitType.Absolute) });
+					facGrid.ColumnDefinitions.Add (new ColumnDefinition { Width = new GridLength (4, GridUnitType.Absolute) });
+					facGrid.ColumnDefinitions.Add (new ColumnDefinition { Width = new GridLength (1, GridUnitType.Absolute) });
+					facGrid.ColumnDefinitions.Add (new ColumnDefinition { Width = new GridLength (4, GridUnitType.Absolute) });
+					facGrid.ColumnDefinitions.Add (new ColumnDefinition { Width = new GridLength (1, GridUnitType.Absolute) });
+					facGrid.ColumnDefinitions.Add (new ColumnDefinition { Width = new GridLength (4, GridUnitType.Absolute) });
+					//45
+					facGrid.ColumnDefinitions.Add (new ColumnDefinition { Width = new GridLength (1, GridUnitType.Absolute) });
+					facGrid.ColumnDefinitions.Add (new ColumnDefinition { Width = new GridLength (4, GridUnitType.Absolute) });
+					facGrid.ColumnDefinitions.Add (new ColumnDefinition { Width = new GridLength (1, GridUnitType.Absolute) });
+					facGrid.ColumnDefinitions.Add (new ColumnDefinition { Width = new GridLength (4, GridUnitType.Absolute) });
+					facGrid.ColumnDefinitions.Add (new ColumnDefinition { Width = new GridLength (1, GridUnitType.Absolute) });
+					facGrid.ColumnDefinitions.Add (new ColumnDefinition { Width = new GridLength (4, GridUnitType.Absolute) });
+				}
+
+				//6pm (243)
 				facGrid.ColumnDefinitions.Add (new ColumnDefinition { Width = new GridLength (1, GridUnitType.Absolute) });
-				facGrid.ColumnDefinitions.Add (new ColumnDefinition { Width = new GridLength (4, GridUnitType.Absolute) });
-				facGrid.ColumnDefinitions.Add (new ColumnDefinition { Width = new GridLength (1, GridUnitType.Absolute) });
-				facGrid.ColumnDefinitions.Add (new ColumnDefinition { Width = new GridLength (4, GridUnitType.Absolute) });
-				facGrid.ColumnDefinitions.Add (new ColumnDefinition { Width = new GridLength (1, GridUnitType.Absolute) });
-				facGrid.ColumnDefinitions.Add (new ColumnDefinition { Width = new GridLength (4, GridUnitType.Absolute) });
-				//15
-				facGrid.ColumnDefinitions.Add (new ColumnDefinition { Width = new GridLength (1, GridUnitType.Absolute) });
-				facGrid.ColumnDefinitions.Add (new ColumnDefinition { Width = new GridLength (4, GridUnitType.Absolute) });
-				facGrid.ColumnDefinitions.Add (new ColumnDefinition { Width = new GridLength (1, GridUnitType.Absolute) });
-				facGrid.ColumnDefinitions.Add (new ColumnDefinition { Width = new GridLength (4, GridUnitType.Absolute) });
-				facGrid.ColumnDefinitions.Add (new ColumnDefinition { Width = new GridLength (1, GridUnitType.Absolute) });
-				facGrid.ColumnDefinitions.Add (new ColumnDefinition { Width = new GridLength (4, GridUnitType.Absolute) });
-				//30
-				facGrid.ColumnDefinitions.Add (new ColumnDefinition { Width = new GridLength (1, GridUnitType.Absolute) });
-				facGrid.ColumnDefinitions.Add (new ColumnDefinition { Width = new GridLength (4, GridUnitType.Absolute) });
-				facGrid.ColumnDefinitions.Add (new ColumnDefinition { Width = new GridLength (1, GridUnitType.Absolute) });
-				facGrid.ColumnDefinitions.Add (new ColumnDefinition { Width = new GridLength (4, GridUnitType.Absolute) });
-				facGrid.ColumnDefinitions.Add (new ColumnDefinition { Width = new GridLength (1, GridUnitType.Absolute) });
-				facGrid.ColumnDefinitions.Add (new ColumnDefinition { Width = new GridLength (4, GridUnitType.Absolute) });
-				//45
-				facGrid.ColumnDefinitions.Add (new ColumnDefinition { Width = new GridLength (1, GridUnitType.Absolute) });
-				facGrid.ColumnDefinitions.Add (new ColumnDefinition { Width = new GridLength (4, GridUnitType.Absolute) });
-				facGrid.ColumnDefinitions.Add (new ColumnDefinition { Width = new GridLength (1, GridUnitType.Absolute) });
-				facGrid.ColumnDefinitions.Add (new ColumnDefinition { Width = new GridLength (4, GridUnitType.Absolute) });
-				facGrid.ColumnDefinitions.Add (new ColumnDefinition { Width = new GridLength (1, GridUnitType.Absolute) });
-				facGrid.ColumnDefinitions.Add (new ColumnDefinition { Width = new GridLength (4, GridUnitType.Absolute) });
+
+				//spacing of 10 (244,245)
+				facGrid.ColumnDefinitions.Add (new ColumnDefinition { Width = new GridLength (30, GridUnitType.Absolute) });
+				facGrid.ColumnDefinitions.Add (new ColumnDefinition { Width = new GridLength (10, GridUnitType.Absolute) });
 			}
 
-			//6pm (243)
-			facGrid.ColumnDefinitions.Add (new ColumnDefinition { Width = new GridLength (1, GridUnitType.Absolute) });
-
-			//spacing of 10 (244,245)
-			facGrid.ColumnDefinitions.Add (new ColumnDefinition { Width = new GridLength (30, GridUnitType.Absolute) });
-			facGrid.ColumnDefinitions.Add (new ColumnDefinition { Width = new GridLength (10, GridUnitType.Absolute) });
-
+			for (int i = 0; i < facilityList.Count; i++) {
+				//for (int i = 0; i < facSample.Count; i++) {
+				facGrid.RowDefinitions.Add (new RowDefinition { Height = new GridLength (1, GridUnitType.Absolute) });
+				facGrid.RowDefinitions.Add (new RowDefinition { Height = new GridLength (30, GridUnitType.Absolute) });
+			}
 
 			//for loop to change according to database**
 			//number of facility from database
 			//edit to change label to database value
 			for (int i = 0; i < facilityList.Count; i++) {
 				//for (int i = 0; i < facSample.Count; i++) {
-				facGrid.RowDefinitions.Add (new RowDefinition { Height = new GridLength (1, GridUnitType.Absolute) });
-				facGrid.RowDefinitions.Add (new RowDefinition { Height = new GridLength (30, GridUnitType.Absolute) });
+				//facGrid.RowDefinitions.Add (new RowDefinition { Height = new GridLength (1, GridUnitType.Absolute) });
+				//facGrid.RowDefinitions.Add (new RowDefinition { Height = new GridLength (30, GridUnitType.Absolute) });
 
 				//number = (left,right,top,bottom)
 				//black horizonal line
@@ -528,10 +540,10 @@ namespace FacilityReservationKiosk
 							end = (((ehour - 8) * 24) + 3) + ((emin / 5) * 2);
 						}
 
-						BoxView boxReservation = new BoxView { BackgroundColor = Color.Silver };
+						//BoxView boxReservation = new BoxView { BackgroundColor = Color.Silver };
 						//start, end , top, bottom
 						//facGrid.Children.Add (box, 3, 243, (i*2) + 1 , (i*2)+2);
-						facGrid.Children.Add (boxReservation, start, end, (i * 2) + 1, (i * 2) + 2);
+						//facGrid.Children.Add (boxReservation, start, end, (i * 2) + 1, (i * 2) + 2);
 
 						//facGrid.Children.Add (facBut, start, end, (i*2) + 1, (i*2)+2);
 						Label labelRes =  new Label {
@@ -539,10 +551,12 @@ namespace FacilityReservationKiosk
 							TextColor = Color.Black,
 							FontSize = 13,
 							XAlign = TextAlignment.Center,
-							YAlign = TextAlignment.Center
+							YAlign = TextAlignment.Center,
+							BackgroundColor = Color.Silver
 						};
 						facGrid.Children.Add (labelRes, start, end, (i * 2) + 1, (i * 2) + 2);
 
+						/*
 						Image imageArrow;
 						imageArrow = new Image { Source = ImageSource.FromFile("arrowg.png") };
 						facGrid.Children.Add (imageArrow, start, start + 20, (i * 2) + 2 , (i * 2) + 4);
@@ -552,7 +566,7 @@ namespace FacilityReservationKiosk
 						imageBox = new Image { BackgroundColor = Color.Silver };
 						facGrid.Children.Add (imageBox, start, start + 50, 6 , 11);	
 						imageBox.Opacity = 0;
-
+*/
 						//click button gesture
 						//pop out box
 						//pass in Facility id 
@@ -564,62 +578,17 @@ namespace FacilityReservationKiosk
 							//Navigation.PushModalAsync (new FacilityDetailsPage (labelFac.Text));
 							//imageArrow.Opacity = 0;
 
-							imageBox.Opacity = 1;
-							imageArrow.Opacity = 1;
+							//imageBox.Opacity = 1;
+							//imageArrow.Opacity = 1;
 						};
 						labelRes.GestureRecognizers.Add (tapDes);
 					}
 
-					//date now
-					string dateNowLine = DateTime.Now.ToString ("dd-MM-yyyy HH:mm:ss");
-					dateTiming = DateTime.Now.ToString ("hh.mm tt");
-					string[] linetoken = dateNowLine.Split (new[] { " " }, StringSplitOptions.None);
-					//time
-					string[] linetiming = linetoken [1].Split (new[] { ":" }, StringSplitOptions.None);
-					//timing[0] = 08 (hour) //timing[1] = 30 (mins)
-					int linehour = Convert.ToInt16 (linetiming [0]);
-					int linemin = Convert.ToInt16 (linetiming [1]);
-
-					int boxhour = Convert.ToInt16 (linetiming [0]);
-					int boxmin = Convert.ToInt16 (linetiming [1]);
-
-					if (linemin == 0) {
-						linestart = (((linehour - 8) * 24) + 3);
-					} else {
-						linestart = (((linehour - 8) * 24) + 3) + ((linemin / 5) * 2);
-					}
-
-					if (boxmin == 0) {
-						boxstart = (((boxhour - 8) * 24) + 15);
-					} else {
-						boxstart = (((boxhour - 8) * 24) + 15) + ((boxmin / 5) * 2);
-					}
-				
-
-				//draw vertical lines
-				//8am,9am,10am
-				facGrid.Children.Add (new BoxView { BackgroundColor = Color.Black }, 3, 4, i * 2, (i * 2) + 3);
-				facGrid.Children.Add (new BoxView { BackgroundColor = Color.Black }, 27, 28, i * 2, (i * 2) + 3);
-				facGrid.Children.Add (new BoxView { BackgroundColor = Color.Black }, 51, 52, i * 2, (i * 2) + 3);
-				facGrid.Children.Add (new BoxView { BackgroundColor = Color.Black }, 75, 76, i * 2, (i * 2) + 3);
-				facGrid.Children.Add (new BoxView { BackgroundColor = Color.Black }, 99, 100, i * 2, (i * 2) + 3);
-				facGrid.Children.Add (new BoxView { BackgroundColor = Color.Black }, 123, 124, i * 2, (i * 2) + 3);
-				facGrid.Children.Add (new BoxView { BackgroundColor = Color.Black }, 147, 148, i * 2, (i * 2) + 3);
-				facGrid.Children.Add (new BoxView { BackgroundColor = Color.Black }, 171, 172, i * 2, (i * 2) + 3);
-				facGrid.Children.Add (new BoxView { BackgroundColor = Color.Black }, 195, 196, i * 2, (i * 2) + 3);
-				facGrid.Children.Add (new BoxView { BackgroundColor = Color.Black }, 219, 220, i * 2, (i * 2) + 3);
-				facGrid.Children.Add (new BoxView { BackgroundColor = Color.Black }, 243, 244, i * 2, (i * 2) + 3);
 
 				//Xamarin.Forms.Device.StartTimer (TimeSpan.FromSeconds(1), () => {
 
 					//refresh red box
 					//boxLine.BackgroundColor = Color.Transparent;
-
-					BoxView bl =  new BoxView { BackgroundColor = Color.Red };
-
-					boxLine = bl;
-
-					facGrid.Children.Add (bl, linestart, linestart + 1, i * 2, (i * 2) + 3);
 
 					//return true;
 
@@ -627,6 +596,56 @@ namespace FacilityReservationKiosk
 				}
 			
 			}
+
+
+			//draw vertical lines
+			//8am,9am,10am
+
+			int endCol = ((facilityList.Count - 1) * 2) + 3;
+			facGrid.Children.Add (new BoxView { BackgroundColor = Color.Black }, 3, 4, 0, endCol);
+			facGrid.Children.Add (new BoxView { BackgroundColor = Color.Black }, 27, 28, 0, endCol);
+			facGrid.Children.Add (new BoxView { BackgroundColor = Color.Black }, 51, 52, 0, endCol);
+			facGrid.Children.Add (new BoxView { BackgroundColor = Color.Black }, 75, 76, 0, endCol);
+			facGrid.Children.Add (new BoxView { BackgroundColor = Color.Black }, 99, 100, 0, endCol);
+			facGrid.Children.Add (new BoxView { BackgroundColor = Color.Black }, 123, 124, 0, endCol);
+			facGrid.Children.Add (new BoxView { BackgroundColor = Color.Black }, 147, 148, 0, endCol);
+			facGrid.Children.Add (new BoxView { BackgroundColor = Color.Black }, 171, 172, 0, endCol);
+			facGrid.Children.Add (new BoxView { BackgroundColor = Color.Black }, 195, 196, 0, endCol);
+			facGrid.Children.Add (new BoxView { BackgroundColor = Color.Black }, 219, 220, 0, endCol);
+			facGrid.Children.Add (new BoxView { BackgroundColor = Color.Black }, 243, 244, 0, endCol);
+
+
+			//date now
+			string dateNowLine = DateTime.Now.ToString ("dd-MM-yyyy HH:mm:ss");
+			dateTiming = DateTime.Now.ToString ("hh.mm tt");
+			string[] linetoken = dateNowLine.Split (new[] { " " }, StringSplitOptions.None);
+			//time
+			string[] linetiming = linetoken [1].Split (new[] { ":" }, StringSplitOptions.None);
+			//timing[0] = 08 (hour) //timing[1] = 30 (mins)
+			int linehour = Convert.ToInt16 (linetiming [0]);
+			int linemin = Convert.ToInt16 (linetiming [1]);
+
+			int boxhour = Convert.ToInt16 (linetiming [0]);
+			int boxmin = Convert.ToInt16 (linetiming [1]);
+
+			if (linemin == 0) {
+				linestart = (((linehour - 8) * 24) + 3);
+			} else {
+				linestart = (((linehour - 8) * 24) + 3) + ((linemin / 5) * 2);
+			}
+
+			if (boxmin == 0) {
+				boxstart = (((boxhour - 8) * 24) + 15);
+			} else {
+				boxstart = (((boxhour - 8) * 24) + 15) + ((boxmin / 5) * 2);
+			}
+
+			BoxView bl =  new BoxView { BackgroundColor = Color.Red };
+
+			boxLine = bl;
+
+			facGrid.Children.Add (bl, linestart, linestart + 1, 0, ((facilityList.Count - 1) * 2) + 3);
+
 
 //			activityIndicator.IsRunning = false;
 //			activityIndicator.IsVisible = false;
@@ -672,7 +691,9 @@ namespace FacilityReservationKiosk
 			entry.Tapped += (object sender, EventArgs e) => 
 				checkToday.Opacity = 0;
 			entry.Completed += (object sender, EventArgs e) => {
-				date = entry.Text;
+				string dateCapture = entry.Text;
+				string[] dateSplittedC = dateCapture.Split (new[] { "-" }, StringSplitOptions.None);
+				date = dateSplittedC[2] + "-" + dateSplittedC[1] + "-" + dateSplittedC[0];
 				GetFacilityTable();
 				checkToday.Opacity = 0;
 				this.SetValue(MasterDetailPage.IsPresentedProperty,(object) false);

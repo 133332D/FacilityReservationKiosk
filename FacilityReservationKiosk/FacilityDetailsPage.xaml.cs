@@ -562,6 +562,9 @@ namespace FacilityReservationKiosk
 
 			boxGrid.Children.Add (new BoxView { BackgroundColor = Color.Red }, boxstart - 9, boxstart + 10,0,1);
 			boxGrid.Children.Add (new Label { Text = dateTiming, TextColor = Color.Black, FontSize = 9.5, XAlign = TextAlignment.Center, YAlign = TextAlignment.Center}, boxstart - 9, boxstart + 10,0,1);
+
+			//codes for insert image
+
 		}
 	}
 }
