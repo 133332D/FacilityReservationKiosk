@@ -247,6 +247,66 @@
 								</StackLayout>
 								</ViewCell.View>
 							</ViewCell>
+							<ViewCell x:Name="viewCell1516">
+							<ViewCell.View>
+							<StackLayout Orientation="Horizontal">
+									<Grid>
+										<Grid.ColumnDefinitions>
+											<ColumnDefinition Width="10">
+											</ColumnDefinition>
+											<ColumnDefinition Width="250">
+											</ColumnDefinition>
+											<ColumnDefinition Width="*">
+											</ColumnDefinition>
+										</Grid.ColumnDefinitions>
+										<Label x:Name="lbl_threefour" Text="3PM to 4PM" YAlign="Center" Grid.Row="0" Grid.Column="1">
+										</Label>
+										<Image x:Name="checkmark1516" Source="check_mark.jpg" Grid.Row="0" Grid.Column="2">
+										</Image>
+									</Grid>
+								</StackLayout>
+								</ViewCell.View>
+							</ViewCell>
+							<ViewCell x:Name="viewCell1617">
+							<ViewCell.View>
+							<StackLayout Orientation="Horizontal">
+									<Grid>
+										<Grid.ColumnDefinitions>
+											<ColumnDefinition Width="10">
+											</ColumnDefinition>
+											<ColumnDefinition Width="250">
+											</ColumnDefinition>
+											<ColumnDefinition Width="*">
+											</ColumnDefinition>
+										</Grid.ColumnDefinitions>
+										<Label x:Name="lbl_fourfive" Text="4PM to 5PM" YAlign="Center" Grid.Row="0" Grid.Column="1">
+										</Label>
+										<Image x:Name="checkmark1617" Source="check_mark.jpg" Grid.Row="0" Grid.Column="2">
+										</Image>
+									</Grid>
+								</StackLayout>
+								</ViewCell.View>
+							</ViewCell>
+							<ViewCell x:Name="viewCell1718">
+							<ViewCell.View>
+							<StackLayout Orientation="Horizontal">
+									<Grid>
+										<Grid.ColumnDefinitions>
+											<ColumnDefinition Width="10">
+											</ColumnDefinition>
+											<ColumnDefinition Width="250">
+											</ColumnDefinition>
+											<ColumnDefinition Width="*">
+											</ColumnDefinition>
+										</Grid.ColumnDefinitions>
+										<Label x:Name="lbl_fivesix" Text="5PM to 6PM" YAlign="Center" Grid.Row="0" Grid.Column="1">
+										</Label>
+										<Image x:Name="checkmark1718" Source="check_mark.jpg" Grid.Row="0" Grid.Column="2">
+										</Image>
+									</Grid>
+								</StackLayout>
+								</ViewCell.View>
+							</ViewCell>
 						</TableSection>
 					</TableRoot>
 				</TableView>

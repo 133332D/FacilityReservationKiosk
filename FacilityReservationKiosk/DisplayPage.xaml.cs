@@ -19,6 +19,12 @@ namespace FacilityReservationKiosk
 			GeneratedKey.Text = "Loaded Or Generated Keys: ";
 			PublicKey.Text = "Public Key: " + ConfigurationSettings.Hardware.PublicKey;
 			PrivateKey.Text = "Private Key: " + ConfigurationSettings.Hardware.PrivateKey;
+
+//			UniqueID.Text = "Device Unique ID: " + FacilityReservationKiosk.App.Hardware.DeviceId;
+//			FacilityReservationKiosk.App.Hardware.LoadOrGenerateKeys("publickey.Txt", "privatekey.Txt");
+//			GeneratedKey.Text = "Loaded Or Generated Keys: ";
+//			PublicKey.Text = "Public Key: " + FacilityReservationKiosk.App.Hardware.PublicKey;
+//			PrivateKey.Text = "Private Key: " + FacilityReservationKiosk.App.Hardware.PrivateKey;
 		}
 	}
 }
