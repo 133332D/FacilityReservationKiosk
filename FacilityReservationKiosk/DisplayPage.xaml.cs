@@ -11,11 +11,14 @@ namespace FacilityReservationKiosk
 		{
 			InitializeComponent ();
 
-			UniqueID.Text = "Device Unique ID: " + FacilityReservationKiosk.App.Hardware.DeviceId;
-			FacilityReservationKiosk.App.Hardware.LoadOrGenerateKeys("publickey.Txt", "privatekey.Txt");
+			UniqueID.Text = "Device Unique ID: " + ConfigurationSettings.Hardware.DeviceId;
+			string errorMessage = ConfigurationSettings.Hardware.LoadOrGenerateKeys("publickey.Txt", "privatekey.Txt");
+			if(errorMessage != null)
+				DisplayAlert("Error", errorMessage, "OK");
+
 			GeneratedKey.Text = "Loaded Or Generated Keys: ";
-			PublicKey.Text = "Public Key: " + FacilityReservationKiosk.App.Hardware.PublicKey;
-			PrivateKey.Text = "Private Key: " + FacilityReservationKiosk.App.Hardware.PrivateKey;
+			PublicKey.Text = "Public Key: " + ConfigurationSettings.Hardware.PublicKey;
+			PrivateKey.Text = "Private Key: " + ConfigurationSettings.Hardware.PrivateKey;
 		}
 	}
 }

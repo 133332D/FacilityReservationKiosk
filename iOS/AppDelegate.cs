@@ -19,8 +19,11 @@ namespace FacilityReservationKiosk.iOS
 			Xamarin.Calabash.Start();
 			#endif
 
+
+			ConfigurationSettings.Hardware = new Hardware();
 			LoadApplication (new App ());
 
+			//FacilityReservationKiosk.App.Hardware = new Hardware ();
 			return base.FinishedLaunching (app, options);
 		}
 	}

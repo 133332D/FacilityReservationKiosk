@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 
 namespace FacilityReservationKiosk
 {
@@ -16,8 +17,7 @@ namespace FacilityReservationKiosk
 			get;
 		}
 
-		void LoadOrGenerateKeys (string publicKeyFileName, string privateKeyFileName);
-
+		string LoadOrGenerateKeys (string publicKeyFileName, string privateKeyFileName);
 
 	}
 }

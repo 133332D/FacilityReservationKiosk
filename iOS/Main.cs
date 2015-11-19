@@ -13,7 +13,6 @@ namespace FacilityReservationKiosk.iOS
 		static void Main (string[] args)
 		{
 
-			FacilityReservationKiosk.App.Hardware = new Hardware ();
 
 			// if you want to use a different Application Delegate class from "AppDelegate"
 			// you can specify it here.

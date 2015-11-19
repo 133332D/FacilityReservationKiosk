@@ -4,12 +4,18 @@ using System.Text;
 using System.Security.Cryptography;
 using System.IO;
 using System.Net.Http;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using Xamarin.Forms;
 
 namespace FacilityReservationKiosk.iOS
 {
 	public class Hardware : IHardware
 	{
 		private static Hardware _Default;
+
+		string status;
+		string message;
 
 		public static Hardware Default {
 			get {
@@ -53,12 +59,12 @@ namespace FacilityReservationKiosk.iOS
 			}
 		}
 
-		public void LoadOrGenerateKeys (string publicKeyFileName, string privateKeyFileName)
+		public string LoadOrGenerateKeys (string publicKeyFileName, string privateKeyFileName)
 		{
 			var documentsPath = Environment.GetFolderPath (Environment.SpecialFolder.Personal);
 			var filePath = Path.Combine (documentsPath, publicKeyFileName);
 
-			//System.IO.File.Delete(filePath);
+			System.IO.File.Delete(filePath);
 
 			//Check if public key pairs have been generated
 			if (File.Exists (filePath)) {
@@ -70,6 +76,8 @@ namespace FacilityReservationKiosk.iOS
 				//Loading private key pair from file 
 				filePath = Path.Combine (documentsPath, privateKeyFileName);
 				privatekey = System.IO.File.ReadAllText (filePath);
+
+				return null;
 			}
 
 			//Generate a new public key pair if it have not been generated 
@@ -99,18 +107,21 @@ namespace FacilityReservationKiosk.iOS
 					//url & data to be pass to be saved in the database 
 					string urlAdmin = ConfigurationSettings.urladmin + "Registration.aspx?UniqueID=" + DeviceId
 						+ "&PublicKey=" + publickey;
-
-
+					
 					using (var client2 = new HttpClient ()) {
 						HttpResponseMessage responseMsg2 = client2.GetAsync (urlAdmin).Result;
 
 						var json2 = responseMsg2.Content.ReadAsStringAsync ();
 						json2.Wait ();
 
-						ReservationList list2 = JsonConvert.DeserializeObject<ReservationList> (json2.Result);
+						string jsonString = json2.Result.ToString ();
+						var obj = JObject.Parse (jsonString);
+						status = (string)obj.SelectToken ("Result");
+						message = (string)obj.SelectToken ("Message");
 						}
 
 
+						
 					//Saving public key to file
 					filePath = Path.Combine (documentsPath, publicKeyFileName);
 					System.IO.File.WriteAllText (filePath, publickey);
@@ -118,11 +129,22 @@ namespace FacilityReservationKiosk.iOS
 					//Saving private key to file
 					filePath = Path.Combine (documentsPath, privateKeyFileName);
 					System.IO.File.WriteAllText (filePath, privatekey);
+
+					if (status == "OK") 
+					{
+						return null;
+					}
+					else 
+					{
+						return ("Error: " + message);
+					}
 				}
 				catch (Exception ex) {
 					//Any errors? Show them 
 					Console.WriteLine ("Exception generating a new key pair! More info: ");
 					Console.WriteLine (ex.Message);
+
+					return ("Exception generating a new key pair! More info: " + ex.Message);
 				}
 				finally {
 				}

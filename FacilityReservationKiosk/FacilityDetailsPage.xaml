@@ -127,6 +127,8 @@
 			</Label>
 			<!-- create to put image, edit padding-->
 
+			<Image x:Name="image" Source="image-.jpg">
+			</Image>
 		</StackLayout>
 	</ContentPage.Content>
 </ContentPage>

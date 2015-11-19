@@ -127,6 +127,8 @@ namespace FacilityReservationKiosk
 				}
 			}
 
+
+
 			timeline.RowDefinitions.Add (new RowDefinition { Height = new GridLength (10, GridUnitType.Absolute) });
 			timeline.RowDefinitions.Add (new RowDefinition { Height = new GridLength (30, GridUnitType.Absolute) });
 
