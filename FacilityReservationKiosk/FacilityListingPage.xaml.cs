@@ -25,6 +25,7 @@ namespace FacilityReservationKiosk
 		//yyyy-MMM-dd
 		//check with webservice to confirm format again
 		string date = "2015-AUG-13";
+		string availability = "";
 
 		Label timeLabel = new Label{};
 
@@ -207,39 +208,6 @@ namespace FacilityReservationKiosk
 			public List<Filter> Filters { get; set; }
 		}
 
-		void TapL_Tapped ()
-		{
-			
-			//if( == "Block L Level 2"){
-			block = "L";
-			//ImageL.Opacity = 1;
-			//ImageM.Opacity = 0;
-			this.SetValue(MasterDetailPage.IsPresentedProperty,(object) false);
-			//Navigation.PushModalAsync (new FacilityListingPage ());
-			//}
-		}
-
-		void TapM_Tapped (object sender, EventArgs e)
-		{
-			block = "M";
-			level = "3";
-			name = "M.3";
-			//ImageL.Opacity = 0;
-			//ImageM.Opacity = 1;
-			//GetFacilityTable ();
-			this.SetValue (MasterDetailPage.IsPresentedProperty, (object)false);
-			//Navigation.PopModalAsync (true);
-			GetFacilityTable ();
-
-			//this.SetValue (MasterDetailPage.IsPresentedProperty, (object)false);
-
-			//remove the rows from grid
-			//facGrid.Children.RemoveAt(0);
-			//facGrid.Children.Clear();
-
-			//Navigation.PushModalAsync (new FacilityListingPage ());
-		}
-
 		void todaytap_Tapped (object sender, EventArgs e)
 		{
 			//"2015-AUG-13"
@@ -364,7 +332,8 @@ namespace FacilityReservationKiosk
 			                + "&Block=" + block + "&Level=" + level + "&Name=" + name + "&DeviceID=&Hash=";
 
 			string urlRes = ConfigurationSettings.urliPad + "GetFacilityReservations.aspx?DepartmentID=" + departmentID
-			                + "&Block=" + block + "&Level=" + level + "&Name=" + name + "&Date=" + date + "&DeviceID=&Hash=";
+			                + "&Block=" + block + "&Level=" + level + "&Name=" + name + "&Date=" + date + "&Availability=" + 
+				availability + "&DeviceID=&Hash=";
 
 			//to get all the facility and insert to an c# object
 			using (var client = new HttpClient ()) {
@@ -546,6 +515,7 @@ namespace FacilityReservationKiosk
 						//facGrid.Children.Add (boxReservation, start, end, (i * 2) + 1, (i * 2) + 2);
 
 						//facGrid.Children.Add (facBut, start, end, (i*2) + 1, (i*2)+2);
+
 						Label labelRes =  new Label {
 							Text = text,
 							TextColor = Color.Black,
@@ -679,9 +649,211 @@ namespace FacilityReservationKiosk
 //			tapL.Tapped += TapL_Tapped;
 			//filterName.GestureRecognizers.Add (tapL);
 
-			var tapM = new TapGestureRecognizer ();
-			tapM.Tapped += TapM_Tapped;
+//			var tapM = new TapGestureRecognizer ();
+//			tapM.Tapped += TapM_Tapped;
 			//M.GestureRecognizers.Add (tapM);
+
+			checkAll.Opacity = 1;
+			checkmark89.Opacity = 0;
+			checkmark910.Opacity = 0;
+			checkmark1011.Opacity = 0;
+			checkmark1112.Opacity = 0;
+			checkmark1213.Opacity = 0;
+			checkmark1314.Opacity = 0;
+			checkmark1415.Opacity = 0;
+			checkmark1516.Opacity = 0;
+			checkmark1617.Opacity = 0;
+			checkmark1718.Opacity = 0;
+
+			//availability
+			var tapView89 = new TapGestureRecognizer ();
+			tapView89.Tapped += (object sender, EventArgs e) => {
+				checkAll.Opacity = 0;
+				checkmark89.Opacity = 1;
+				checkmark910.Opacity = 0;
+				checkmark1011.Opacity = 0;
+				checkmark1112.Opacity = 0;
+				checkmark1213.Opacity = 0;
+				checkmark1314.Opacity = 0;
+				checkmark1415.Opacity = 0;
+				checkmark1516.Opacity = 0;
+				checkmark1617.Opacity = 0;
+				checkmark1718.Opacity = 0;
+				availability = "89";
+				GetFacilityTable();
+				this.SetValue(MasterDetailPage.IsPresentedProperty,(object) false);
+			};;
+			lbl_eightnine.GestureRecognizers.Add (tapView89);
+
+			var tapView910 = new TapGestureRecognizer ();
+			tapView910.Tapped += (object sender, EventArgs e) => {
+				checkAll.Opacity = 0;
+				checkmark89.Opacity = 0;
+				checkmark910.Opacity = 1;
+				checkmark1011.Opacity = 0;
+				checkmark1112.Opacity = 0;
+				checkmark1213.Opacity = 0;
+				checkmark1314.Opacity = 0;
+				checkmark1415.Opacity = 0;
+				checkmark1516.Opacity = 0;
+				checkmark1617.Opacity = 0;
+				checkmark1718.Opacity = 0;
+				availability = "910";
+				GetFacilityTable();
+				this.SetValue(MasterDetailPage.IsPresentedProperty,(object) false);
+			};;
+			lbl_nineten.GestureRecognizers.Add (tapView910);
+
+			var tapView1011 = new TapGestureRecognizer ();
+			tapView1011.Tapped += (object sender, EventArgs e) => {
+				checkAll.Opacity = 0;
+				checkmark89.Opacity = 0;
+				checkmark910.Opacity = 0;
+				checkmark1011.Opacity = 1;
+				checkmark1112.Opacity = 0;
+				checkmark1213.Opacity = 0;
+				checkmark1314.Opacity = 0;
+				checkmark1415.Opacity = 0;
+				checkmark1516.Opacity = 0;
+				checkmark1617.Opacity = 0;
+				checkmark1718.Opacity = 0;
+				availability = "1011";
+				GetFacilityTable();
+				this.SetValue(MasterDetailPage.IsPresentedProperty,(object) false);
+			};;
+			lbl_teneleven.GestureRecognizers.Add (tapView1011);
+
+			var tapView1112 = new TapGestureRecognizer ();
+			tapView1112.Tapped += (object sender, EventArgs e) => {
+				checkAll.Opacity = 0;
+				checkmark89.Opacity = 0;
+				checkmark910.Opacity = 0;
+				checkmark1011.Opacity = 0;
+				checkmark1112.Opacity = 1;
+				checkmark1213.Opacity = 0;
+				checkmark1314.Opacity = 0;
+				checkmark1415.Opacity = 0;
+				checkmark1516.Opacity = 0;
+				checkmark1617.Opacity = 0;
+				checkmark1718.Opacity = 0;
+				availability = "1112";
+				GetFacilityTable();
+				this.SetValue(MasterDetailPage.IsPresentedProperty,(object) false);
+			};;
+			lbl_eleven12.GestureRecognizers.Add (tapView1112);
+
+			var tapView1213 = new TapGestureRecognizer ();
+			tapView1213.Tapped += (object sender, EventArgs e) => {
+				checkmark89.Opacity = 0;
+				checkmark910.Opacity = 0;
+				checkmark1011.Opacity = 0;
+				checkmark1112.Opacity = 0;
+				checkmark1213.Opacity = 1;
+				checkmark1314.Opacity = 0;
+				checkmark1415.Opacity = 0;
+				checkmark1516.Opacity = 0;
+				checkmark1617.Opacity = 0;
+				checkmark1718.Opacity = 0;
+				availability = "1213";
+				GetFacilityTable();
+				this.SetValue(MasterDetailPage.IsPresentedProperty,(object) false);
+			};;
+			lbl_twelve13.GestureRecognizers.Add (tapView1213);
+
+			var tapView1314 = new TapGestureRecognizer ();
+			tapView1314.Tapped += (object sender, EventArgs e) => {
+				checkAll.Opacity = 0;
+				checkmark89.Opacity = 0;
+				checkmark910.Opacity = 0;
+				checkmark1011.Opacity = 0;
+				checkmark1112.Opacity = 0;
+				checkmark1213.Opacity = 0;
+				checkmark1314.Opacity = 1;
+				checkmark1415.Opacity = 0;
+				checkmark1516.Opacity = 0;
+				checkmark1617.Opacity = 0;
+				checkmark1718.Opacity = 0;
+				availability = "1314";
+				GetFacilityTable();
+				this.SetValue(MasterDetailPage.IsPresentedProperty,(object) false);
+			};;
+			lbl_onetwo.GestureRecognizers.Add (tapView1314);
+
+			var tapView1415 = new TapGestureRecognizer ();
+			tapView1415.Tapped += (object sender, EventArgs e) => {
+				checkAll.Opacity = 0;
+				checkmark89.Opacity = 0;
+				checkmark910.Opacity = 0;
+				checkmark1011.Opacity = 0;
+				checkmark1112.Opacity = 0;
+				checkmark1213.Opacity = 0;
+				checkmark1314.Opacity = 0;
+				checkmark1415.Opacity = 1;
+				checkmark1516.Opacity = 0;
+				checkmark1617.Opacity = 0;
+				checkmark1718.Opacity = 0;
+				availability = "1415";
+				GetFacilityTable();
+				this.SetValue(MasterDetailPage.IsPresentedProperty,(object) false);
+			};;
+			lbl_twothree.GestureRecognizers.Add (tapView1415);
+
+			var tapView1516 = new TapGestureRecognizer ();
+			tapView1516.Tapped += (object sender, EventArgs e) => {
+				checkAll.Opacity = 0;
+				checkmark89.Opacity = 0;
+				checkmark910.Opacity = 0;
+				checkmark1011.Opacity = 0;
+				checkmark1112.Opacity = 0;
+				checkmark1213.Opacity = 0;
+				checkmark1314.Opacity = 0;
+				checkmark1415.Opacity = 0;
+				checkmark1516.Opacity = 1;
+				checkmark1617.Opacity = 0;
+				checkmark1718.Opacity = 0;
+				availability = "1516";
+				GetFacilityTable();
+				this.SetValue(MasterDetailPage.IsPresentedProperty,(object) false);
+			};;
+			lbl_threefour.GestureRecognizers.Add (tapView1516);
+
+			var tapView1617 = new TapGestureRecognizer ();
+			tapView1617.Tapped += (object sender, EventArgs e) => {
+				checkAll.Opacity = 0;
+				checkmark89.Opacity = 0;
+				checkmark910.Opacity = 0;
+				checkmark1011.Opacity = 0;
+				checkmark1112.Opacity = 0;
+				checkmark1213.Opacity = 0;
+				checkmark1314.Opacity = 0;
+				checkmark1415.Opacity = 0;
+				checkmark1516.Opacity = 0;
+				checkmark1617.Opacity = 1;
+				checkmark1718.Opacity = 0;
+				availability = "1617";
+				GetFacilityTable();
+				this.SetValue(MasterDetailPage.IsPresentedProperty,(object) false);
+			};;
+			lbl_fourfive.GestureRecognizers.Add (tapView1617);
+
+			var tapView1718 = new TapGestureRecognizer ();
+			tapView1718.Tapped += (object sender, EventArgs e) => {
+				checkAll.Opacity = 0;
+				checkmark89.Opacity = 0;
+				checkmark910.Opacity = 0;
+				checkmark1011.Opacity = 0;
+				checkmark1112.Opacity = 0;
+				checkmark1213.Opacity = 0;
+				checkmark1314.Opacity = 0;
+				checkmark1415.Opacity = 0;
+				checkmark1516.Opacity = 0;
+				checkmark1617.Opacity = 0;
+				checkmark1718.Opacity = 1;
+				availability = "1718";
+				GetFacilityTable();
+				this.SetValue(MasterDetailPage.IsPresentedProperty,(object) false);
+			};;
+			lbl_fivesix.GestureRecognizers.Add (tapView1718);
 
 			//Date filter
 			var todaytap = new TapGestureRecognizer ();
