@@ -99,7 +99,7 @@
 											<ColumnDefinition Width="*">
 											</ColumnDefinition>
 										</Grid.ColumnDefinitions>
-										<Label x:Name="lbl_All" Text="All" YAlign="Center" Grid.Row="0" Grid.Column="1">
+										<Label x:Name="lbl_All" Text="All               " YAlign="Center" Grid.Row="0" Grid.Column="1">
 										</Label>
 										<Image x:Name="checkAll" Source="check_mark.jpg" Grid.Row="0" Grid.Column="2">
 										</Image>
@@ -119,7 +119,7 @@
 											<ColumnDefinition Width="*">
 											</ColumnDefinition>
 										</Grid.ColumnDefinitions>
-										<Label x:Name="lbl_eightnine" Text="8AM to 9AM" YAlign="Center" Grid.Row="0" Grid.Column="1">
+										<Label x:Name="lbl_eightnine" Text="8AM to 9AM      " YAlign="Center" Grid.Row="0" Grid.Column="1">
 										</Label>
 										<Image x:Name="checkmark89" Source="check_mark.jpg" Grid.Row="0" Grid.Column="2">
 										</Image>
@@ -139,7 +139,7 @@
 											<ColumnDefinition Width="*">
 											</ColumnDefinition>
 										</Grid.ColumnDefinitions>
-										<Label x:Name="lbl_nineten" Text="9AM to 10AM" YAlign="Center" Grid.Row="0" Grid.Column="1">
+										<Label x:Name="lbl_nineten" Text="9AM to 10AM      " YAlign="Center" Grid.Row="0" Grid.Column="1">
 										</Label>
 										<Image x:Name="checkmark910" Source="check_mark.jpg" Grid.Row="0" Grid.Column="2">
 										</Image>
@@ -159,7 +159,7 @@
 											<ColumnDefinition Width="*">
 											</ColumnDefinition>
 										</Grid.ColumnDefinitions>
-										<Label x:Name="lbl_teneleven" Text="10AM to 11AM" YAlign="Center" Grid.Row="0" Grid.Column="1">
+										<Label x:Name="lbl_teneleven" Text="10AM to 11AM      " YAlign="Center" Grid.Row="0" Grid.Column="1">
 										</Label>
 										<Image x:Name="checkmark1011" Source="check_mark.jpg" Grid.Row="0" Grid.Column="2">
 										</Image>
@@ -179,7 +179,7 @@
 											<ColumnDefinition Width="*">
 											</ColumnDefinition>
 										</Grid.ColumnDefinitions>
-										<Label x:Name="lbl_eleven12" Text="11AM to 12NN" YAlign="Center" Grid.Row="0" Grid.Column="1">
+										<Label x:Name="lbl_eleven12" Text="11AM to 12NN      " YAlign="Center" Grid.Row="0" Grid.Column="1">
 										</Label>
 										<Image x:Name="checkmark1112" Source="check_mark.jpg" Grid.Row="0" Grid.Column="2">
 										</Image>
@@ -199,7 +199,7 @@
 											<ColumnDefinition Width="*">
 											</ColumnDefinition>
 										</Grid.ColumnDefinitions>
-										<Label x:Name="lbl_twelve13" Text="12NN to 1PM" YAlign="Center" Grid.Row="0" Grid.Column="1">
+										<Label x:Name="lbl_twelve13" Text="12NN to 1PM      " YAlign="Center" Grid.Row="0" Grid.Column="1">
 										</Label>
 										<Image x:Name="checkmark1213" Source="check_mark.jpg" Grid.Row="0" Grid.Column="2">
 										</Image>
@@ -219,7 +219,7 @@
 											<ColumnDefinition Width="*">
 											</ColumnDefinition>
 										</Grid.ColumnDefinitions>
-										<Label x:Name="lbl_onetwo" Text="1PM to 2PM" YAlign="Center" Grid.Row="0" Grid.Column="1">
+										<Label x:Name="lbl_onetwo" Text="1PM to 2PM      " YAlign="Center" Grid.Row="0" Grid.Column="1">
 										</Label>
 										<Image x:Name="checkmark1314" Source="check_mark.jpg" Grid.Row="0" Grid.Column="2">
 										</Image>
@@ -239,7 +239,7 @@
 											<ColumnDefinition Width="*">
 											</ColumnDefinition>
 										</Grid.ColumnDefinitions>
-										<Label x:Name="lbl_twothree" Text="2PM to 3PM" YAlign="Center" Grid.Row="0" Grid.Column="1">
+										<Label x:Name="lbl_twothree" Text="2PM to 3PM      " YAlign="Center" Grid.Row="0" Grid.Column="1">
 										</Label>
 										<Image x:Name="checkmark1415" Source="check_mark.jpg" Grid.Row="0" Grid.Column="2">
 										</Image>
@@ -259,7 +259,7 @@
 											<ColumnDefinition Width="*">
 											</ColumnDefinition>
 										</Grid.ColumnDefinitions>
-										<Label x:Name="lbl_threefour" Text="3PM to 4PM" YAlign="Center" Grid.Row="0" Grid.Column="1">
+										<Label x:Name="lbl_threefour" Text="3PM to 4PM      " YAlign="Center" Grid.Row="0" Grid.Column="1">
 										</Label>
 										<Image x:Name="checkmark1516" Source="check_mark.jpg" Grid.Row="0" Grid.Column="2">
 										</Image>
@@ -279,7 +279,7 @@
 											<ColumnDefinition Width="*">
 											</ColumnDefinition>
 										</Grid.ColumnDefinitions>
-										<Label x:Name="lbl_fourfive" Text="4PM to 5PM" YAlign="Center" Grid.Row="0" Grid.Column="1">
+										<Label x:Name="lbl_fourfive" Text="4PM to 5PM      " YAlign="Center" Grid.Row="0" Grid.Column="1">
 										</Label>
 										<Image x:Name="checkmark1617" Source="check_mark.jpg" Grid.Row="0" Grid.Column="2">
 										</Image>
@@ -299,7 +299,7 @@
 											<ColumnDefinition Width="*">
 											</ColumnDefinition>
 										</Grid.ColumnDefinitions>
-										<Label x:Name="lbl_fivesix" Text="5PM to 6PM" YAlign="Center" Grid.Row="0" Grid.Column="1">
+										<Label x:Name="lbl_fivesix" Text="5PM to 6PM      " YAlign="Center" Grid.Row="0" Grid.Column="1">
 										</Label>
 										<Image x:Name="checkmark1718" Source="check_mark.jpg" Grid.Row="0" Grid.Column="2">
 										</Image>

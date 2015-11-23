@@ -272,7 +272,7 @@ namespace FacilityReservationKiosk
 						HorizontalOptions = LayoutOptions.Start,
 						Children = {
 							new Label () {
-								Text = "   " + filterList[m].filterName,
+								Text = "   " + filterList[m].filterName + "           ",
 								YAlign = TextAlignment.Center,
 								GestureRecognizers = {
 									new TapGestureRecognizer() {
@@ -298,15 +298,38 @@ namespace FacilityReservationKiosk
 			}
 		}
 
+		DateTime? dateStartAvail = null;
+		DateTime? dateEndAvail = null;
+		DateTime dateConvert;
+
+		public void filterAvailability()
+		{
+			for (int f = 0; f < reservationList.Count; f++) {
+				if (((dateStartAvail <= reservationList [f].startDateTime &&
+					reservationList [f].startDateTime < dateEndAvail)
+					|| (dateStartAvail <= reservationList [f].endDateTime &&
+						reservationList [f].endDateTime < dateEndAvail)
+					|| (reservationList [f].startDateTime <= dateStartAvail &&
+						dateEndAvail <= reservationList [f].endDateTime))) {
+					facilityList.RemoveAll (x => x.facilityID == reservationList[f].facilityID);
+				}
+			}
+		}
+
 		//method to call** to run the grid loop
 		public void GetFacilityTable ()
 		{
 			//get datetime of today
-			string dateToday = DateTime.Today.ToString ("D");
+			string dateToday = DateTime.Today.ToString ("dd-MMM-yyyy");
+			string[] sDateSeperate = date.Split (new[] { "-" }, StringSplitOptions.None);
 
 			//set the label eg. School Of IT, level 4
 			//set based on filter***
-			title.Text = "School Of IT, Level " + level + "\n" + dateToday;
+			if (date == "") {
+				title.Text = "School Of IT, Level " + level + "\n" + dateToday;
+			} else {
+				title.Text = "School Of IT, Level " + level + "\n" + sDateSeperate[2] + "-" + sDateSeperate[1] + "-" + sDateSeperate[0];
+			}
 			title.FontAttributes = FontAttributes.Bold;
 
 			//activity indicator
@@ -317,6 +340,7 @@ namespace FacilityReservationKiosk
 //			this.IsBusy = true;
 
 			facilityList = new List<FacObject> ();
+			reservationList = new List<ResObject> ();
 		
 			facGrid.IsVisible = false;
 			facGrid.Children.Clear ();
@@ -329,11 +353,12 @@ namespace FacilityReservationKiosk
 
 			//call webservice to get facility and reservation*
 			string urlFac = ConfigurationSettings.urliPad + "GetFacilities.aspx?DepartmentID=" + departmentID
-			                + "&Block=" + block + "&Level=" + level + "&Name=" + name + "&DeviceID=&Hash=";
+			                + "&Block=" + block + "&Level=" + level + "&Name=" + name;
 
 			string urlRes = ConfigurationSettings.urliPad + "GetFacilityReservations.aspx?DepartmentID=" + departmentID
 			                + "&Block=" + block + "&Level=" + level + "&Name=" + name + "&Date=" + date + "&Availability=" + 
-				availability + "&DeviceID=&Hash=";
+				availability;
+
 
 			//to get all the facility and insert to an c# object
 			using (var client = new HttpClient ()) {
@@ -366,6 +391,60 @@ namespace FacilityReservationKiosk
 						                      res.useShortDescription, res.useDescription);
 					reservationList.Add (resObject);
 				}
+			}
+				
+			dateConvert = Convert.ToDateTime (date);
+
+			if (availability == "89") {
+				dateStartAvail = new DateTime (dateConvert.Year, dateConvert.Month, dateConvert.Day, 08, 00, 00);
+				dateEndAvail = new DateTime (dateConvert.Year, dateConvert.Month, dateConvert.Day, 09, 00, 00);
+				filterAvailability ();
+
+			}
+			if (availability == "910") {
+				dateStartAvail = new DateTime (dateConvert.Year, dateConvert.Month, dateConvert.Day, 09, 00, 00);
+				dateEndAvail = new DateTime (dateConvert.Year, dateConvert.Month, dateConvert.Day, 10, 00, 00);
+				filterAvailability ();
+			}
+			if (availability == "1011") {
+				dateStartAvail = new DateTime (dateConvert.Year, dateConvert.Month, dateConvert.Day, 10, 00, 00);
+				dateEndAvail = new DateTime (dateConvert.Year, dateConvert.Month, dateConvert.Day, 11, 00, 00);
+				filterAvailability ();
+			}
+			if (availability == "1112") {
+				dateStartAvail = new DateTime (dateConvert.Year, dateConvert.Month, dateConvert.Day, 11, 00, 00);
+				dateEndAvail = new DateTime (dateConvert.Year, dateConvert.Month, dateConvert.Day, 12, 00, 00);
+				filterAvailability ();
+			}
+			if (availability == "1213") {
+				dateStartAvail = new DateTime (dateConvert.Year, dateConvert.Month, dateConvert.Day, 12, 00, 00);
+				dateEndAvail = new DateTime (dateConvert.Year, dateConvert.Month, dateConvert.Day, 13, 00, 00);
+				filterAvailability ();
+			}
+			if (availability == "1314") {
+				dateStartAvail = new DateTime (dateConvert.Year, dateConvert.Month, dateConvert.Day, 13, 00, 00);
+				dateEndAvail = new DateTime (dateConvert.Year, dateConvert.Month, dateConvert.Day, 14, 00, 00);
+				filterAvailability ();
+			}
+			if (availability == "1415") {
+				dateStartAvail = new DateTime (dateConvert.Year, dateConvert.Month, dateConvert.Day, 14, 00, 00);
+				dateEndAvail = new DateTime (dateConvert.Year, dateConvert.Month, dateConvert.Day, 15, 00, 00);
+				filterAvailability ();
+			}
+			if (availability == "1516") {
+				dateStartAvail = new DateTime (dateConvert.Year, dateConvert.Month, dateConvert.Day, 15, 00, 00);
+				dateEndAvail = new DateTime (dateConvert.Year, dateConvert.Month, dateConvert.Day, 16, 00, 00);
+				filterAvailability ();
+			}
+			if (availability == "1617") {
+				dateStartAvail = new DateTime (dateConvert.Year, dateConvert.Month, dateConvert.Day, 16, 00, 00);
+				dateEndAvail = new DateTime (dateConvert.Year, dateConvert.Month, dateConvert.Day, 17, 00, 00);
+				filterAvailability ();
+			}
+			if (availability == "1718") {
+				dateStartAvail = new DateTime (dateConvert.Year, dateConvert.Month, dateConvert.Day, 17, 00, 00);
+				dateEndAvail = new DateTime (dateConvert.Year, dateConvert.Month, dateConvert.Day, 18, 00, 00);
+				filterAvailability ();
 			}
 
 			//create new rows and column for the grid
@@ -873,8 +952,22 @@ namespace FacilityReservationKiosk
 
 			//availability
 			var alltap = new TapGestureRecognizer ();
-			alltap.Tapped += (object sender, EventArgs e) => 
+			alltap.Tapped += (object sender, EventArgs e) => {
 				checkAll.Opacity = 1;
+				checkmark89.Opacity = 0;
+				checkmark910.Opacity = 0;
+				checkmark1011.Opacity = 0;
+				checkmark1112.Opacity = 0;
+				checkmark1213.Opacity = 0;
+				checkmark1314.Opacity = 0;
+				checkmark1415.Opacity = 0;
+				checkmark1516.Opacity = 0;
+				checkmark1617.Opacity = 0;
+				checkmark1718.Opacity = 1;
+				availability = "";
+				GetFacilityTable ();
+				this.SetValue(MasterDetailPage.IsPresentedProperty,(object) false);
+			};
 			lbl_All.GestureRecognizers.Add (alltap);
 
 			//Facility Reservation Kiosk Name
