@@ -24,7 +24,7 @@ namespace FacilityReservationKiosk
 		string name = "L.4";
 		//yyyy-MMM-dd
 		//check with webservice to confirm format again
-		string date = "2015-AUG-13";
+		string date = "2015-Aug-13";
 		string availability = "";
 
 		Label timeLabel = new Label{};
@@ -691,12 +691,13 @@ namespace FacilityReservationKiosk
 				boxstart = (((boxhour - 8) * 24) + 15) + ((boxmin / 5) * 2);
 			}
 
-			BoxView bl =  new BoxView { BackgroundColor = Color.Red };
+			if (date == DateTime.Now.ToString ("yyyy-MMM-dd")) {
+				BoxView bl = new BoxView { BackgroundColor = Color.Red };
 
-			boxLine = bl;
+				boxLine = bl;
 
-			facGrid.Children.Add (bl, linestart, linestart + 1, 0, ((facilityList.Count - 1) * 2) + 3);
-
+				facGrid.Children.Add (bl, linestart, linestart + 1, 0, ((facilityList.Count - 1) * 2) + 3);
+			}
 
 //			activityIndicator.IsRunning = false;
 //			activityIndicator.IsVisible = false;
@@ -1069,9 +1070,10 @@ namespace FacilityReservationKiosk
 			//Xamarin.Forms.Device.StartTimer (TimeSpan.FromSeconds(1), () => {
 
 				//refresh red box
+			if (date == DateTime.Now.ToString ("yyyy-MMM-dd")) {
 				boxRed.BackgroundColor = Color.Transparent;
 
-				Label b =  new Label { BackgroundColor = Color.Red };
+				Label b = new Label { BackgroundColor = Color.Red };
 
 				boxRed = b;
 
@@ -1093,6 +1095,7 @@ namespace FacilityReservationKiosk
 				timeLabel = l;
 
 				boxGrid.Children.Add (l, boxstart - 9, boxstart + 10, 0, 1);
+			}
 
 				//return true;
 			//});

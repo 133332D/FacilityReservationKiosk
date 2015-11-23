@@ -185,13 +185,13 @@ namespace FacilityReservationKiosk
 			//labelNow.Text = "";
 
 			//check if display label as today or other date
-			//if (date == DateTime.Now.ToString ("yyyy-MMM-dd")) {
+			if (date == DateTime.Now.ToString ("yyyy-MMM-dd")) {
 				labelNow.Text = "Today";
-			//} 
-			//else {
-			//	string [] arrayDate = date.Split (new[] { "-" }, StringSplitOptions.None);
-			//	labelNow.Text = arrayDate [2] + "-" + arrayDate [1] + "-" + arrayDate [0];
-			//}
+			} 
+			else {
+				string [] arrayDate = date.Split (new[] { "-" }, StringSplitOptions.None);
+				labelNow.Text = arrayDate [2] + "-" + arrayDate [1] + "-" + arrayDate [0];
+			}
 
 			TimeSpan dateNowHourStatus;
 			TimeSpan dateStartStatus;
@@ -526,8 +526,10 @@ namespace FacilityReservationKiosk
 				lineGrid.Children.Add (new BoxView { BackgroundColor = Color.Black }, 219, 220, 0, 3);
 				lineGrid.Children.Add (new BoxView { BackgroundColor = Color.Black }, 243, 244, 0, 3);
 
+			if (date == DateTime.Now.ToString ("yyyy-MMM-dd")) {
 				//draw red line 
 				lineGrid.Children.Add (new BoxView { BackgroundColor = Color.Red }, linestart, linestart + 1, 0, 3);
+			}
 			//}
 			//box view grid
 			//create new rows and column for the grid
@@ -607,9 +609,16 @@ namespace FacilityReservationKiosk
 			boxGrid.ColumnDefinitions.Add (new ColumnDefinition { Width = new GridLength (10, GridUnitType.Absolute) });
 
 			boxGrid.RowDefinitions.Add (new RowDefinition { Height = new GridLength (15, GridUnitType.Absolute) });
-
-			boxGrid.Children.Add (new BoxView { BackgroundColor = Color.Red }, boxstart - 9, boxstart + 10,0,1);
-			boxGrid.Children.Add (new Label { Text = dateTiming, TextColor = Color.Black, FontSize = 9.5, XAlign = TextAlignment.Center, YAlign = TextAlignment.Center}, boxstart - 9, boxstart + 10,0,1);
+			if (date == DateTime.Now.ToString ("yyyy-MMM-dd")) {
+				boxGrid.Children.Add (new BoxView { BackgroundColor = Color.Red }, boxstart - 9, boxstart + 10, 0, 1);
+				boxGrid.Children.Add (new Label {
+					Text = dateTiming,
+					TextColor = Color.Black,
+					FontSize = 9.5,
+					XAlign = TextAlignment.Center,
+					YAlign = TextAlignment.Center
+				}, boxstart - 9, boxstart + 10, 0, 1);
+			}
 		}
 	}
 }
