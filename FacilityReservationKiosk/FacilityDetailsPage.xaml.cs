@@ -90,7 +90,7 @@ namespace FacilityReservationKiosk
 			}
 		}
 
-		public FacilityDetailsPage (string passFacilityID)
+		public FacilityDetailsPage (string passFacilityID, string datePass)
 		{
 			InitializeComponent ();
 
@@ -102,7 +102,7 @@ namespace FacilityReservationKiosk
 			string name = passFacilityID;
 			//yyyy-MMM-dd
 			//check with webservice to confirm format again
-			string date = "2015-AUG-13";
+			string date = datePass;
 
 			//Facility Reservation Kiosk Name
 			appName.Text = "Facility Reservation Kiosk";
@@ -185,7 +185,7 @@ namespace FacilityReservationKiosk
 			//labelNow.Text = "";
 
 			//check if display label as today or other date
-			if (date == DateTime.Now.ToString ("yyyy-MMM-dd")) {
+			if (date == DateTime.Now.ToString ("yyyy-MMM-dd") || date == "") {
 				labelNow.Text = "Today";
 			} 
 			else {
@@ -526,7 +526,7 @@ namespace FacilityReservationKiosk
 				lineGrid.Children.Add (new BoxView { BackgroundColor = Color.Black }, 219, 220, 0, 3);
 				lineGrid.Children.Add (new BoxView { BackgroundColor = Color.Black }, 243, 244, 0, 3);
 
-			if (date == DateTime.Now.ToString ("yyyy-MMM-dd")) {
+			if (date == DateTime.Now.ToString ("yyyy-MMM-dd") || date == "") {
 				//draw red line 
 				lineGrid.Children.Add (new BoxView { BackgroundColor = Color.Red }, linestart, linestart + 1, 0, 3);
 			}
@@ -609,7 +609,7 @@ namespace FacilityReservationKiosk
 			boxGrid.ColumnDefinitions.Add (new ColumnDefinition { Width = new GridLength (10, GridUnitType.Absolute) });
 
 			boxGrid.RowDefinitions.Add (new RowDefinition { Height = new GridLength (15, GridUnitType.Absolute) });
-			if (date == DateTime.Now.ToString ("yyyy-MMM-dd")) {
+			if (date == DateTime.Now.ToString ("yyyy-MMM-dd") || date == "") {
 				boxGrid.Children.Add (new BoxView { BackgroundColor = Color.Red }, boxstart - 9, boxstart + 10, 0, 1);
 				boxGrid.Children.Add (new Label {
 					Text = dateTiming,

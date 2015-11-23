@@ -24,7 +24,7 @@ namespace FacilityReservationKiosk
 		string name = "L.4";
 		//yyyy-MMM-dd
 		//check with webservice to confirm format again
-		string date = "2015-Aug-13";
+		string date = "";
 		string availability = "";
 
 		Label timeLabel = new Label{};
@@ -358,11 +358,10 @@ namespace FacilityReservationKiosk
 			                + "&Block=" + block + "&Level=" + level + "&Name=" + name;
 
 			string urlRes = ConfigurationSettings.urliPad + "GetFacilityReservations.aspx?DepartmentID=" + departmentID
-			                + "&Block=" + block + "&Level=" + level + "&Name=" + name + "&Date=" + date + "&Availability=" + 
-				availability;
+			                + "&Block=" + block + "&Level=" + level + "&Name=" + name + "&Date=" + date;
 
 
-			//to get all the facility and insert to an c# object
+			//to get all the facility and icnsert to an c# object
 			using (var client = new HttpClient ()) {
 				HttpResponseMessage responseMsg = client.GetAsync (urlFac).Result;
 
@@ -395,7 +394,12 @@ namespace FacilityReservationKiosk
 				}
 			}
 				
-			dateConvert = Convert.ToDateTime (date);
+			if (date = "") {
+				date = DateTime.Now.ToString ("yyyy-MM-dd");
+				dateConvert = Convert.ToDateTime (date);
+			} else {
+				dateConvert = Convert.ToDateTime (date);
+			}
 
 			if (availability == "89") {
 				dateStartAvail = new DateTime (dateConvert.Year, dateConvert.Month, dateConvert.Day, 08, 00, 00);
@@ -529,7 +533,7 @@ namespace FacilityReservationKiosk
 				};
 				var tapFac = new TapGestureRecognizer ();
 				tapFac.Tapped += (object sender, EventArgs e) => 
-					Navigation.PushModalAsync (new FacilityDetailsPage (labelFac.Text));
+					Navigation.PushModalAsync (new FacilityDetailsPage (labelFac.Text, date));
 				labelFac.GestureRecognizers.Add (tapFac);
 
 				facGrid.Children.Add (new BoxView { BackgroundColor = Color.Black }, 1, 245, (i * 2), ((i * 2) + 1));
@@ -691,7 +695,7 @@ namespace FacilityReservationKiosk
 				boxstart = (((boxhour - 8) * 24) + 15) + ((boxmin / 5) * 2);
 			}
 
-			if (date == DateTime.Now.ToString ("yyyy-MMM-dd")) {
+			if (date == DateTime.Now.ToString ("yyyy-MMM-dd") || date == "") {
 				BoxView bl = new BoxView { BackgroundColor = Color.Red };
 
 				boxLine = bl;
@@ -1070,7 +1074,7 @@ namespace FacilityReservationKiosk
 			//Xamarin.Forms.Device.StartTimer (TimeSpan.FromSeconds(1), () => {
 
 				//refresh red box
-			if (date == DateTime.Now.ToString ("yyyy-MMM-dd")) {
+			if (date == DateTime.Now.ToString ("yyyy-MMM-dd") || date == "") {
 				boxRed.BackgroundColor = Color.Transparent;
 
 				Label b = new Label { BackgroundColor = Color.Red };
