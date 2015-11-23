@@ -474,10 +474,11 @@ namespace FacilityReservationKiosk
 
 			if (boxNum == "89") {
 
+				//arrow to move code
+				resGrid.Children.Add (new Image { Source = "arrowg.png" }, 3, 27, 0, 1);
+
 				if ((dateStartStatus >= eighttime && dateStartStatus < ninetime)
 					|| (dateEndStatus > eighttime && dateEndStatus <= ninetime)) {
-					//arrow to move code
-					resGrid.Children.Add (new Image { Source = "arrowg.png" }, 3, 27, 0, 1);
 
 					if (dateStartStatus > eighttime && dateStartStatus < ninetime) {
 						timeFrom = eighttime;
@@ -496,10 +497,11 @@ namespace FacilityReservationKiosk
 
 			if (boxNum == "910") {
 
+				//arrow to move code
+				resGrid.Children.Add (new Image { Source = "arrowg.png" }, 27, 51, 0, 1);
+
 				if (dateStartStatus >= ninetime && dateStartStatus < tentime
 					& dateEndStatus > ninetime && dateEndStatus <= tentime) {
-					//arrow to move code
-					resGrid.Children.Add (new Image { Source = "arrowg.png" }, 27, 51, 0, 1);
 
 					if (dateStartStatus > ninetime && dateStartStatus < tentime) {
 						timeFrom = ninetime;
@@ -518,12 +520,14 @@ namespace FacilityReservationKiosk
 			}
 
 			if (boxNum == "1011") {
+				
+				//arrow to move code
+				resGrid.Children.Add (new Image { Source = "arrowg.png" }, 51, 75, 0, 1);
 
 				if (dateStartStatus >= tentime && dateStartStatus < eleventime
 					& dateEndStatus > tentime && dateEndStatus <= eleventime) {
 
-					//arrow to move code
-					resGrid.Children.Add (new Image { Source = "arrowg.png" }, 51, 75, 0, 1);
+
 
 					if (dateStartStatus >= tentime && dateStartStatus <= eleventime) {
 						timeFrom = tentime;
@@ -543,11 +547,11 @@ namespace FacilityReservationKiosk
 
 			if (boxNum == "1112") {
 
+				//arrow to move code
+				resGrid.Children.Add (new Image { Source = "arrowg.png" }, 75, 99, 0, 1);
+
 				if (dateStartStatus >= eleventime && dateStartStatus < twelvetime
 					& dateEndStatus > eleventime && dateEndStatus <= twelvetime) {
-
-					//arrow to move code
-					resGrid.Children.Add (new Image { Source = "arrowg.png" }, 75, 99, 0, 1);
 
 					if (dateStartStatus >= eleventime && dateStartStatus <= twelvetime) {
 						timeFrom = eleventime;
@@ -567,11 +571,11 @@ namespace FacilityReservationKiosk
 
 			if (boxNum == "1213") {
 
+				//arrow to move code
+				resGrid.Children.Add (new Image { Source = "arrowg.png" }, 99, 123, 0, 1);
+
 				if (dateStartStatus >= twelvetime && dateStartStatus < thirteentime
 					& dateEndStatus > twelvetime && dateEndStatus <= thirteentime) {
-
-					//arrow to move code
-					resGrid.Children.Add (new Image { Source = "arrowg.png" }, 99, 123, 0, 1);
 
 					if (dateStartStatus >= twelvetime && dateStartStatus <= thirteentime) {
 						timeFrom = twelvetime;
@@ -591,11 +595,11 @@ namespace FacilityReservationKiosk
 
 			if (boxNum == "1314") {
 
+				//arrow to move code
+				resGrid.Children.Add (new Image { Source = "arrowg.png" }, 123, 147, 0, 1);
+
 				if (dateStartStatus >= thirteentime && dateStartStatus < fourteentime
 					& dateEndStatus > thirteentime && dateEndStatus <= fourteentime) {
-
-					//arrow to move code
-					resGrid.Children.Add (new Image { Source = "arrowg.png" }, 123, 147, 0, 1);
 
 					if (dateStartStatus >= thirteentime && dateStartStatus <= fourteentime) {
 						timeFrom = thirteentime;
@@ -615,11 +619,11 @@ namespace FacilityReservationKiosk
 
 			if (boxNum == "1415") {
 
+				//arrow to move code
+				resGrid.Children.Add (new Image { Source = "arrowg.png" }, 147, 171, 0, 1);
+
 				if (dateStartStatus >= fourteentime && dateStartStatus < fifteentime
 					& dateEndStatus > fourteentime && dateEndStatus <= fifteentime) {
-
-					//arrow to move code
-					resGrid.Children.Add (new Image { Source = "arrowg.png" }, 147, 171, 0, 1);
 
 					if (dateStartStatus >= fourteentime && dateStartStatus <= fifteentime) {
 						timeFrom = fourteentime;
@@ -639,11 +643,11 @@ namespace FacilityReservationKiosk
 
 			if (boxNum == "1516") {
 
+				//arrow to move code
+				resGrid.Children.Add (new Image { Source = "arrowg.png" }, 171, 195, 0, 1);
+
 				if (dateStartStatus >= fifteentime && dateStartStatus < sixteentime
 					& dateEndStatus > fifteentime && dateEndStatus <= sixteentime) {
-
-					//arrow to move code
-					resGrid.Children.Add (new Image { Source = "arrowg.png" }, 171, 195, 0, 1);
 
 					if (dateStartStatus >= fifteentime && dateStartStatus <= sixteentime) {
 						timeFrom = fifteentime;
@@ -663,11 +667,11 @@ namespace FacilityReservationKiosk
 
 			if (boxNum == "1617") {
 
+				//arrow to move code
+				resGrid.Children.Add (new Image { Source = "arrowg.png" }, 195, 219, 0, 1);
+
 				if (dateStartStatus >= sixteentime && dateStartStatus < seventeentime
 					& dateEndStatus > sixteentime && dateEndStatus <= seventeentime) {
-
-					//arrow to move code
-					resGrid.Children.Add (new Image { Source = "arrowg.png" }, 195, 219, 0, 1);
 
 					if (dateStartStatus >= sixteentime && dateStartStatus <= seventeentime) {
 						timeFrom = sixteentime;
@@ -687,11 +691,11 @@ namespace FacilityReservationKiosk
 
 			if (boxNum == "1718") {
 
+				//arrow to move code
+				resGrid.Children.Add (new Image { Source = "arrowg.png" }, 219, 243, 0, 1);
+
 				if (dateStartStatus >= seventeentime && dateStartStatus < eighteentime
 					& dateEndStatus > seventeentime && dateEndStatus <= eighteentime) {
-
-					//arrow to move code
-					resGrid.Children.Add (new Image { Source = "arrowg.png" }, 219, 243, 0, 1);
 
 					if (dateStartStatus >= seventeentime && dateStartStatus <= eighteentime) {
 						timeFrom = seventeentime;

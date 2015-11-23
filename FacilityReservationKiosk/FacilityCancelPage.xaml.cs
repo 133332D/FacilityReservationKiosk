@@ -359,6 +359,74 @@ namespace FacilityReservationKiosk
 						}, 173, 210, 5, 6);
 
 						facilityReservationID = reservationList [j].facilityReservationID;
+
+						string eight = "08:00:00";
+						string nine = "09:00:00";
+						string ten = "10:00:00";
+						string eleven = "11:00:00";
+						string twelve = "12:00:00";
+						string thirteen = "13:00:00";
+						string fourteen = "14:00:00";
+						string fifteen = "15:00:00";
+						string sixteen = "16:00:00";
+						string seventeen = "17:00:00";
+						string eighteen = "18:00:00";
+
+						TimeSpan eighttime = Convert.ToDateTime(eight).TimeOfDay;
+						TimeSpan ninetime = Convert.ToDateTime(nine).TimeOfDay;
+						TimeSpan tentime = Convert.ToDateTime(ten).TimeOfDay;
+						TimeSpan eleventime = Convert.ToDateTime(eleven).TimeOfDay;
+						TimeSpan twelvetime = Convert.ToDateTime(twelve).TimeOfDay;
+						TimeSpan thirteentime = Convert.ToDateTime(thirteen).TimeOfDay;
+						TimeSpan fourteentime = Convert.ToDateTime(fourteen).TimeOfDay;
+						TimeSpan fifteentime = Convert.ToDateTime(fifteen).TimeOfDay;
+						TimeSpan sixteentime = Convert.ToDateTime(sixteen).TimeOfDay;
+						TimeSpan seventeentime = Convert.ToDateTime(seventeen).TimeOfDay;
+						TimeSpan eighteentime = Convert.ToDateTime(eighteen).TimeOfDay;
+
+
+						//write if else or switch to set position of arrow
+						if (reservationList [j].startDateTime.TimeOfDay >= eighttime
+							&& reservationList [j].startDateTime.TimeOfDay < ninetime) {
+							resGrid.Children.Add (new Image { Source = "arrowg.png" }, 3, 27, 0, 1);
+						}
+						if (reservationList [j].startDateTime.TimeOfDay >= ninetime
+							&& reservationList [j].startDateTime.TimeOfDay < tentime) {
+							resGrid.Children.Add (new Image { Source = "arrowg.png" }, 27, 51, 0, 1);
+						}
+						if (reservationList [j].startDateTime.TimeOfDay >= tentime
+							&& reservationList [j].startDateTime.TimeOfDay < eleventime) {
+							resGrid.Children.Add (new Image { Source = "arrowg.png" }, 51, 75, 0, 1);
+						}
+						if (reservationList [j].startDateTime.TimeOfDay >= eleventime
+							&& reservationList [j].startDateTime.TimeOfDay < twelvetime) {
+							resGrid.Children.Add (new Image { Source = "arrowg.png" }, 75, 99, 0, 1);
+						}
+						if (reservationList [j].startDateTime.TimeOfDay >= twelvetime
+							&& reservationList [j].startDateTime.TimeOfDay < thirteentime) {
+							resGrid.Children.Add (new Image { Source = "arrowg.png" }, 99, 123, 0, 1);
+						}
+						if (reservationList [j].startDateTime.TimeOfDay >= thirteentime
+							&& reservationList [j].startDateTime.TimeOfDay < fourteentime) {
+							resGrid.Children.Add (new Image { Source = "arrowg.png" }, 123, 147, 0, 1);
+						}
+						if (reservationList [j].startDateTime.TimeOfDay >= fourteentime
+							&& reservationList [j].startDateTime.TimeOfDay < fifteentime) {
+							resGrid.Children.Add (new Image { Source = "arrowg.png" }, 147, 171, 0, 1);
+						}
+						if (reservationList [j].startDateTime.TimeOfDay >= fifteentime
+							&& reservationList [j].startDateTime.TimeOfDay < sixteentime) {
+							resGrid.Children.Add (new Image { Source = "arrowg.png" }, 171, 195, 0, 1);
+						}
+						if (reservationList [j].startDateTime.TimeOfDay >= sixteentime
+							&& reservationList [j].startDateTime.TimeOfDay < seventeentime) {
+							resGrid.Children.Add (new Image { Source = "arrowg.png" }, 195, 219, 0, 1);
+						}
+						if (reservationList [j].startDateTime.TimeOfDay >= seventeentime
+							&& reservationList [j].startDateTime.TimeOfDay < eighteentime) {
+							resGrid.Children.Add (new Image { Source = "arrowg.png" }, 219, 243, 0, 1);
+						}
+
 					}
 
 				}	
@@ -406,10 +474,8 @@ namespace FacilityReservationKiosk
 			lineGrid.Children.Add (new BoxView { BackgroundColor = Color.Black }, 219, 220, 0, 3);
 			lineGrid.Children.Add (new BoxView { BackgroundColor = Color.Black }, 243, 244, 0, 3);
 
-			if (date == DateTime.Now.ToString ("yyyy-MMM-dd")) {
-				//draw red line
-				lineGrid.Children.Add (new BoxView { BackgroundColor = Color.Red }, linestart, linestart + 1, 0, 3);
-			}
+			//draw red line
+			lineGrid.Children.Add (new BoxView { BackgroundColor = Color.Red }, linestart, linestart + 1, 0, 3);
 
 			//box view grid
 			//create new rows and column for the grid
@@ -489,19 +555,15 @@ namespace FacilityReservationKiosk
 			boxGrid.ColumnDefinitions.Add (new ColumnDefinition { Width = new GridLength (10, GridUnitType.Absolute) });
 
 			boxGrid.RowDefinitions.Add (new RowDefinition { Height = new GridLength (15, GridUnitType.Absolute) });
-			if (date == DateTime.Now.ToString ("yyyy-MMM-dd")) {
-				boxGrid.Children.Add (new BoxView { BackgroundColor = Color.Red }, boxstart - 9, boxstart + 10, 0, 1);
-				boxGrid.Children.Add (new Label {
-					Text = dateTiming,
-					TextColor = Color.Black,
-					FontSize = 9.5,
-					XAlign = TextAlignment.Center,
-					YAlign = TextAlignment.Center
-				}, boxstart - 9, boxstart + 10, 0, 1);
-			}
 
-			//write if else or switch to set position of arrow
-			resGrid.Children.Add (new Image { Source = "arrowg.png" }, 3, 27, 0, 1);
+			boxGrid.Children.Add (new BoxView { BackgroundColor = Color.Red }, boxstart - 9, boxstart + 10, 0, 1);
+			boxGrid.Children.Add (new Label {
+				Text = dateTiming,
+				TextColor = Color.Black,
+				FontSize = 9.5,
+				XAlign = TextAlignment.Center,
+				YAlign = TextAlignment.Center
+			}, boxstart - 9, boxstart + 10, 0, 1);
 
 			// add in label and textboxes to make new reservation
 			resGrid.Children.Add (new Label {

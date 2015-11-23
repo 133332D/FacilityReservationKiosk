@@ -3,7 +3,11 @@ using System.Collections.Generic;
 using System.Text;
 using System.Security.Cryptography;
 using System.IO;
+using System.Net;
 using System.Net.Http;
+using System.Net.Http.Headers;
+
+
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Xamarin.Forms;
@@ -87,7 +91,6 @@ namespace FacilityReservationKiosk.iOS
 			var filePath = Path.Combine (documentsPath, publicKeyFileName);
 
 			System.IO.File.Delete(filePath);
-
 			//Check if public key pairs have been generated
 			if (File.Exists (filePath)) {
 
@@ -125,10 +128,10 @@ namespace FacilityReservationKiosk.iOS
 					//Export Private Key 
 					privatekey = rsaProvider.ToXmlString(true);
 
-					//Consume web service 
+					//Web Service 
 					//url & data to be pass to be saved in the database 
-					string urlAdmin = ConfigurationSettings.urladmin + "Registration.aspx?UniqueID=" + DeviceId
-						+ "&PublicKey=" + publickey;
+					string urlAdmin = ConfigurationSettings.urladmin + "Registration.aspx?UniqueID=" + ConfigurationSettings.Hardware.DeviceId
+						+ "&PublicKey=" + System.Web.HttpUtility.UrlEncode(publickey);
 					
 					using (var client2 = new HttpClient ()) {
 						HttpResponseMessage responseMsg2 = client2.GetAsync (urlAdmin).Result;
@@ -159,8 +162,6 @@ namespace FacilityReservationKiosk.iOS
 						return ("Error: " + message);
 					}
 
-					//HashAlgorithm sha = new SHA1CryptoServiceProvider();
-					//byte[] result = sha.ComputeHash(DeviceId);
 
 				}
 				catch (Exception ex) {

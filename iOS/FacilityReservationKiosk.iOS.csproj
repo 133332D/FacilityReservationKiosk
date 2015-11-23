@@ -102,6 +102,7 @@
     <Reference Include="Mono.Security" />
     <Reference Include="System.Data" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Web.Services" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\Default.png" />
