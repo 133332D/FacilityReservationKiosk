@@ -55,6 +55,41 @@ namespace FacilityReservationKiosk
 			public List<Reservation> Reservations { get; set; }
 		}
 
+		public void UpdateCamera(string passFacilityID)
+		{
+			string urlRes = ConfigurationSettings.urliPad + "GetCameraID.aspx?FacilityID=" + passFacilityID;
+
+			using (var client2 = new HttpClient ()) {
+				HttpResponseMessage responseMsg2 = client2.GetAsync (urlRes).Result;
+
+				var json2 = responseMsg2.Content.ReadAsStringAsync ();
+				json2.Wait ();
+
+				string[] CameraIDstring = json2.Result.Split (',');
+
+				DensityLabel.Text = CameraIDstring [CameraIDstring.Length - 1].Replace ("d", "") + "%";
+				CameraImages.Children.Clear();
+
+				int cameraCount = 0;
+				for (var i = 0; i < CameraIDstring.Length - 1; i++) {
+					if (CameraIDstring [i] != "") {
+						string Imageurl = ConfigurationSettings.urliPad + "images/image-" + CameraIDstring [i] + ".jpg?r=" + DateTime.Now.ToString ("yyyyMMddhhmmss");
+
+						var image = new Image {
+							Source = ImageSource.FromUri (new Uri (Imageurl))
+						};
+						CameraImages.Children.Add (image);
+						cameraCount++;
+					}
+				}
+				if (cameraCount == 0) {
+					CameraImagesContainer.IsVisible = false;
+					DensityContainer.IsVisible = false;
+				}
+
+			}
+		}
+
 		public FacilityDetailsPage (string passFacilityID)
 		{
 			InitializeComponent ();
@@ -126,6 +161,17 @@ namespace FacilityReservationKiosk
 					reservationList.Add (resObject);
 				}
 			}
+
+
+			UpdateCamera (passFacilityID);
+			Xamarin.Forms.Device.StartTimer (TimeSpan.FromSeconds(20), () => {
+
+				UpdateCamera(passFacilityID);
+
+
+				return true;
+
+			});
 
 
 
@@ -564,9 +610,6 @@ namespace FacilityReservationKiosk
 
 			boxGrid.Children.Add (new BoxView { BackgroundColor = Color.Red }, boxstart - 9, boxstart + 10,0,1);
 			boxGrid.Children.Add (new Label { Text = dateTiming, TextColor = Color.Black, FontSize = 9.5, XAlign = TextAlignment.Center, YAlign = TextAlignment.Center}, boxstart - 9, boxstart + 10,0,1);
-
-			//codes for insert image
-
 		}
 	}
 }

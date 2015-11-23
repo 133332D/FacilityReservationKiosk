@@ -224,6 +224,8 @@ namespace FacilityReservationKiosk
 		{
 			string urlFil = ConfigurationSettings.urliPad + "GetDepartmentFilters.aspx?DepartmentID=" + departmentID;
 
+			urlFil = Security.SignHttpRequest (urlFil);
+
 			using (var client = new HttpClient ()) {
 				HttpResponseMessage responseMsg3 = client.GetAsync (urlFil).Result;
 

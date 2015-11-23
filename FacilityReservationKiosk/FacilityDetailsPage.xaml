@@ -126,9 +126,15 @@
 			<Label Text="Tap to reserve the time slots" XAlign="Center" FontAttributes="Bold">
 			</Label>
 			<!-- create to put image, edit padding-->
-
-			<Image x:Name="image" Source="image-.jpg">
-			</Image>
+			<StackLayout x:Name="DensityContainer" Orientation="Horizontal"  HorizontalOptions="CenterAndExpand" Padding="0,40,0,0">
+				<Label FontAttributes="Bold" Text="Crowd Level: "></Label>
+				<Label x:Name="DensityLabel"></Label>
+			</StackLayout>
+			<StackLayout Orientation="Horizontal"  BackgroundColor="#dddddd" x:Name="CameraImagesContainer">
+				
+				<StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" x:Name="CameraImages" Padding="30" BackgroundColor="#dddddd">
+				</StackLayout>
+			</StackLayout>
 		</StackLayout>
 	</ContentPage.Content>
 </ContentPage>

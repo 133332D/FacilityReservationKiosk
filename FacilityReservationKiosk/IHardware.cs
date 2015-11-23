@@ -19,6 +19,7 @@ namespace FacilityReservationKiosk
 
 		string LoadOrGenerateKeys (string publicKeyFileName, string privateKeyFileName);
 
+		string SignString (string s);
 	}
 }
 

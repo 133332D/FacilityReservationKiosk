@@ -60,8 +60,29 @@ namespace FacilityReservationKiosk.iOS
 			}
 		}
 
+
+
+		public string SignString(string s)
+		{
+			LoadOrGenerateKeys("publickey.Txt", "privatekey.Txt");
+			RSACryptoServiceProvider rsaProvider = null;
+
+			rsaProvider = new RSACryptoServiceProvider ();
+			rsaProvider.FromXmlString (privatekey);
+
+			string signatureResult = "";
+			byte[] signature = rsaProvider.SignData(System.Text.UTF8Encoding.UTF8.GetBytes(s.ToCharArray()), "SHA256");
+			for(int i=0; i<signature.Length; i++)
+				signatureResult += String.Format("{0:X2}", signature[i]);
+
+			return signatureResult;
+		}
+
 		public string LoadOrGenerateKeys (string publicKeyFileName, string privateKeyFileName)
 		{
+			if (publickey != null)
+				return null;
+			
 			var documentsPath = Environment.GetFolderPath (Environment.SpecialFolder.Personal);
 			var filePath = Path.Combine (documentsPath, publicKeyFileName);
 
@@ -120,8 +141,6 @@ namespace FacilityReservationKiosk.iOS
 						status = (string)obj.SelectToken ("Result");
 						message = (string)obj.SelectToken ("Message");
 						}
-
-
 						
 					//Saving public key to file
 					filePath = Path.Combine (documentsPath, publicKeyFileName);
@@ -139,6 +158,10 @@ namespace FacilityReservationKiosk.iOS
 					{
 						return ("Error: " + message);
 					}
+
+					//HashAlgorithm sha = new SHA1CryptoServiceProvider();
+					//byte[] result = sha.ComputeHash(DeviceId);
+
 				}
 				catch (Exception ex) {
 					//Any errors? Show them 
