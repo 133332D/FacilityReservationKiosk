@@ -64,8 +64,6 @@ namespace FacilityReservationKiosk.iOS
 			}
 		}
 
-
-
 		public string SignString(string s)
 		{
 			LoadOrGenerateKeys("publickey.Txt", "privatekey.Txt");
@@ -90,7 +88,7 @@ namespace FacilityReservationKiosk.iOS
 			var documentsPath = Environment.GetFolderPath (Environment.SpecialFolder.Personal);
 			var filePath = Path.Combine (documentsPath, publicKeyFileName);
 
-			System.IO.File.Delete(filePath);
+			//System.IO.File.Delete(filePath);
 			//Check if public key pairs have been generated
 			if (File.Exists (filePath)) {
 

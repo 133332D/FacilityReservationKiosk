@@ -633,7 +633,7 @@ namespace FacilityReservationKiosk
 					}
 
 					if (status == "OK") {
-						DisplayAlert ("Reservation", "Cancellation was sucessful!", "OK");
+						ShowAlert ("Reservation", "Cancellation was sucessful!", "OK");
 					} else {
 						DisplayAlert ("Error", message, "OK");
 					}
@@ -649,6 +649,12 @@ namespace FacilityReservationKiosk
 		void CancelBut_Clicked (object sender, EventArgs e)
 		{
 			Navigation.PopModalAsync (true);
+		}
+
+		public async void ShowAlert(string title, string message, string button)
+		{
+			await DisplayAlert (title, message, button);
+			await Navigation.PushModalAsync(new FacilityListingPage());
 		}
 	}
 }
