@@ -143,6 +143,8 @@ namespace FacilityReservationKiosk
 			string urlRes = ConfigurationSettings.urliPad + "GetFacilityReservations.aspx?DepartmentID=" + departmentID
 				+ "&Block=" + block + "&Level=" + level + "&Name=" + name + "&Date=" + date;
 
+			urlRes = Security.SignHttpRequest (urlRes);
+
 			//to get all the reservations and insert to an c# object
 			using (var client2 = new HttpClient ()) {
 				HttpResponseMessage responseMsg2 = client2.GetAsync (urlRes).Result;

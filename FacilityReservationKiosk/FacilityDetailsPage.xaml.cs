@@ -60,6 +60,8 @@ namespace FacilityReservationKiosk
 		{
 			string urlRes = ConfigurationSettings.urliPad + "GetCameraID.aspx?FacilityID=" + passFacilityID;
 
+			urlRes = Security.SignHttpRequest (urlRes);
+
 			using (var client2 = new HttpClient ()) {
 				HttpResponseMessage responseMsg2 = client2.GetAsync (urlRes).Result;
 

@@ -20,6 +20,7 @@ namespace FacilityReservationKiosk
 			//MainPage = new FacilityReservationPage();
 			//MainPage = new FacilityCancelPage("L.424");
 			//MainPage = new DisplayPage();
+			//MainPage = new VerifyingPage();
 		}
 
 		protected override void OnStart ()
