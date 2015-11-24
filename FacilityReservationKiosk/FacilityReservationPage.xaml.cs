@@ -311,7 +311,9 @@ namespace FacilityReservationKiosk
 					//booking reserved
 					string text;
 					if (reservationList [j].useShortDescription == null) {
-						text = "";
+						string temptext = reservationList [j].useDescription;
+						string str = temptext.Substring (0, 4);
+						text = str;
 					} else {
 						text = reservationList [j].useShortDescription;
 					}

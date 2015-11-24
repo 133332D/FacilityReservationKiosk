@@ -553,9 +553,9 @@ namespace FacilityReservationKiosk
 						string text;
 						if (reservationList [j].useShortDescription == null) {
 
-							//string temptext = reservationList [i].useDescription;
-							//string str = temptext.Substring (0, 6);
-							text = "";
+							string temptext = reservationList [j].useDescription;
+							string str = temptext.Substring (0, 4);
+							text = str;
 
 						} else {
 							text = reservationList [j].useShortDescription;
