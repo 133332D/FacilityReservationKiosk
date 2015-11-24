@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Newtonsoft.Json;
 using System.Net.Http;
+using System.Globalization;
 
 using Xamarin.Forms;
 
@@ -102,14 +103,12 @@ namespace FacilityReservationKiosk
 			string name = passFacilityID;
 			//yyyy-MMM-dd
 			//check with webservice to confirm format again
+
 			string date = datePass;
 
 			//Facility Reservation Kiosk Name
 			appName.Text = "Facility Reservation Kiosk";
 			appName.FontAttributes = FontAttributes.Bold;
-
-			//get datetime of today
-			string dateToday = DateTime.Today.ToString ("D");
 
 			//set the label
 			//set based on filter***
@@ -325,61 +324,61 @@ namespace FacilityReservationKiosk
 
 			var tap89 = new TapGestureRecognizer ();
 			tap89.Tapped += (object sender, EventArgs e) => {
-				Navigation.PushModalAsync (new FacilityReservationPage (passFacilityID, "89"));
+				Navigation.PushModalAsync (new FacilityReservationPage (passFacilityID, "89", date));
 			};
 			eightnine.GestureRecognizers.Add (tap89);
 
 			var tap910 = new TapGestureRecognizer ();
 			tap910.Tapped += (object sender, EventArgs e) => {
-				Navigation.PushModalAsync (new FacilityReservationPage (passFacilityID, "910"));
+				Navigation.PushModalAsync (new FacilityReservationPage (passFacilityID, "910", date));
 			};
 			nineten.GestureRecognizers.Add (tap910);
 
 			var tap1011 = new TapGestureRecognizer ();
 			tap1011.Tapped += (object sender, EventArgs e) => {
-				Navigation.PushModalAsync (new FacilityReservationPage (passFacilityID, "1011"));
+				Navigation.PushModalAsync (new FacilityReservationPage (passFacilityID, "1011", date));
 			};
 			teneleven.GestureRecognizers.Add (tap1011);
 
 			var tap1112 = new TapGestureRecognizer ();
 			tap1112.Tapped += (object sender, EventArgs e) => {
-				Navigation.PushModalAsync (new FacilityReservationPage (passFacilityID, "1112"));
+				Navigation.PushModalAsync (new FacilityReservationPage (passFacilityID, "1112", date));
 			};
 			eleventwelve.GestureRecognizers.Add (tap1112);
 
 			var tap1213 = new TapGestureRecognizer ();
 			tap1213.Tapped += (object sender, EventArgs e) => {
-				Navigation.PushModalAsync (new FacilityReservationPage (passFacilityID, "1213"));
+				Navigation.PushModalAsync (new FacilityReservationPage (passFacilityID, "1213", date));
 			};
 			twelve13.GestureRecognizers.Add (tap1213);
 
 			var tap1314 = new TapGestureRecognizer ();
 			tap1314.Tapped += (object sender, EventArgs e) => {
-				Navigation.PushModalAsync (new FacilityReservationPage (passFacilityID, "1314"));
+				Navigation.PushModalAsync (new FacilityReservationPage (passFacilityID, "1314", date));
 			};
 			thirteen14.GestureRecognizers.Add (tap1314);
 
 			var tap1415 = new TapGestureRecognizer ();
 			tap1415.Tapped += (object sender, EventArgs e) => {
-				Navigation.PushModalAsync (new FacilityReservationPage (passFacilityID, "1415"));
+				Navigation.PushModalAsync (new FacilityReservationPage (passFacilityID, "1415", date));
 			};
 			fourteen15.GestureRecognizers.Add (tap1415);
 
 			var tap1516 = new TapGestureRecognizer ();
 			tap1516.Tapped += (object sender, EventArgs e) => {
-				Navigation.PushModalAsync (new FacilityReservationPage (passFacilityID, "1516"));
+				Navigation.PushModalAsync (new FacilityReservationPage (passFacilityID, "1516", date));
 			};
 			fifteen16.GestureRecognizers.Add (tap1516);
 
 			var tap1617 = new TapGestureRecognizer ();
 			tap1617.Tapped += (object sender, EventArgs e) => {
-				Navigation.PushModalAsync (new FacilityReservationPage (passFacilityID, "1617"));
+				Navigation.PushModalAsync (new FacilityReservationPage (passFacilityID, "1617", date));
 			};
 			sixteen17.GestureRecognizers.Add (tap1617);
 
 			var tap1718 = new TapGestureRecognizer ();
 			tap1718.Tapped += (object sender, EventArgs e) => {
-				Navigation.PushModalAsync (new FacilityReservationPage (passFacilityID, "1718"));
+				Navigation.PushModalAsync (new FacilityReservationPage (passFacilityID, "1718", date));
 			};
 			seventeen18.GestureRecognizers.Add (tap1718);
 
@@ -457,7 +456,7 @@ namespace FacilityReservationKiosk
 					var bosRes = new TapGestureRecognizer ();
 					bosRes.Tapped += (object sender, EventArgs e) => {
 						//pass in reservation ID to know which reservation is clicked
-						Navigation.PushModalAsync (new FacilityCancelPage (passFacilityID, id.Text));
+						Navigation.PushModalAsync (new FacilityCancelPage (passFacilityID, id.Text, date));
 					};
 					resLabelTap.GestureRecognizers.Add (bosRes);
 				}	
@@ -526,7 +525,7 @@ namespace FacilityReservationKiosk
 				lineGrid.Children.Add (new BoxView { BackgroundColor = Color.Black }, 219, 220, 0, 3);
 				lineGrid.Children.Add (new BoxView { BackgroundColor = Color.Black }, 243, 244, 0, 3);
 
-			if (date == DateTime.Now.ToString ("yyyy-MMM-dd") || date == "") {
+			if (date == DateTime.Now.ToString ("yyyy-MMM-dd")) {
 				//draw red line 
 				lineGrid.Children.Add (new BoxView { BackgroundColor = Color.Red }, linestart, linestart + 1, 0, 3);
 			}
@@ -609,7 +608,7 @@ namespace FacilityReservationKiosk
 			boxGrid.ColumnDefinitions.Add (new ColumnDefinition { Width = new GridLength (10, GridUnitType.Absolute) });
 
 			boxGrid.RowDefinitions.Add (new RowDefinition { Height = new GridLength (15, GridUnitType.Absolute) });
-			if (date == DateTime.Now.ToString ("yyyy-MMM-dd") || date == "") {
+			if (date == DateTime.Now.ToString ("yyyy-MMM-dd")) {
 				boxGrid.Children.Add (new BoxView { BackgroundColor = Color.Red }, boxstart - 9, boxstart + 10, 0, 1);
 				boxGrid.Children.Add (new Label {
 					Text = dateTiming,

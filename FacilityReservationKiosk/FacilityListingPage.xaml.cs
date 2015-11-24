@@ -8,6 +8,7 @@ using AdvancedTimer;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Collections.ObjectModel;
+using System.Globalization;
 
 using Xamarin.Forms;
 
@@ -24,7 +25,8 @@ namespace FacilityReservationKiosk
 		string name = "L.4";
 		//yyyy-MMM-dd
 		//check with webservice to confirm format again
-		string date = "";
+		string date = ""; 
+
 		string availability = "";
 
 		Label timeLabel = new Label{};
@@ -328,7 +330,7 @@ namespace FacilityReservationKiosk
 			//set the label eg. School Of IT, level 4
 			//set based on filter***
 			if (date == "") {
-				title.Text = "School Of IT, Level " + level + "\n" + dateToday;
+				title.Text = "School Of IT, Level " + level + "\n" + "Today" + "\n" + dateToday;
 			} else {
 				title.Text = "School Of IT, Level " + level + "\n" + sDateSeperate[2] + "-" + sDateSeperate[1] + "-" + sDateSeperate[0];
 			}
@@ -346,6 +348,7 @@ namespace FacilityReservationKiosk
 		
 			facGrid.IsVisible = false;
 			facGrid.Children.Clear ();
+			boxGrid.Children.Clear ();
 			facGrid.RowDefinitions.Clear ();
 			//facGrid.ColumnDefinitions.Clear ();
 			facGrid.IsVisible = true;
@@ -394,8 +397,8 @@ namespace FacilityReservationKiosk
 				}
 			}
 				
-			if (date = "") {
-				date = DateTime.Now.ToString ("yyyy-MM-dd");
+			if (date == "") {
+				date = DateTime.Now.ToString ("yyyy-MMM-dd");
 				dateConvert = Convert.ToDateTime (date);
 			} else {
 				dateConvert = Convert.ToDateTime (date);
@@ -532,8 +535,9 @@ namespace FacilityReservationKiosk
 					YAlign = TextAlignment.Center
 				};
 				var tapFac = new TapGestureRecognizer ();
-				tapFac.Tapped += (object sender, EventArgs e) => 
+				tapFac.Tapped += (object sender, EventArgs e) =>{
 					Navigation.PushModalAsync (new FacilityDetailsPage (labelFac.Text, date));
+				};
 				labelFac.GestureRecognizers.Add (tapFac);
 
 				facGrid.Children.Add (new BoxView { BackgroundColor = Color.Black }, 1, 245, (i * 2), ((i * 2) + 1));
@@ -695,7 +699,7 @@ namespace FacilityReservationKiosk
 				boxstart = (((boxhour - 8) * 24) + 15) + ((boxmin / 5) * 2);
 			}
 
-			if (date == DateTime.Now.ToString ("yyyy-MMM-dd") || date == "") {
+			if (date == "" || date == DateTime.Now.ToString ("yyyy-MMM-dd")) {
 				BoxView bl = new BoxView { BackgroundColor = Color.Red };
 
 				boxLine = bl;
@@ -706,11 +710,123 @@ namespace FacilityReservationKiosk
 //			activityIndicator.IsRunning = false;
 //			activityIndicator.IsVisible = false;
 //			this.IsBusy = false;
+			//box view grid
+			//create new rows and column for the grid
+			boxGrid.RowDefinitions = new RowDefinitionCollection ();
+			boxGrid.ColumnDefinitions = new ColumnDefinitionCollection ();
+
+			//create the columns
+			//0,1,2
+			boxGrid.ColumnDefinitions.Add (new ColumnDefinition { Width = new GridLength (1, GridUnitType.Absolute) });
+			boxGrid.ColumnDefinitions.Add (new ColumnDefinition { Width = new GridLength (1, GridUnitType.Absolute) });
+			boxGrid.ColumnDefinitions.Add (new ColumnDefinition { Width = new GridLength (1, GridUnitType.Star) });
+
+			boxGrid.ColumnDefinitions.Add (new ColumnDefinition { Width = new GridLength (1, GridUnitType.Absolute) });
+			boxGrid.ColumnDefinitions.Add (new ColumnDefinition { Width = new GridLength (3, GridUnitType.Absolute) });
+			boxGrid.ColumnDefinitions.Add (new ColumnDefinition { Width = new GridLength (1, GridUnitType.Absolute) });
+			boxGrid.ColumnDefinitions.Add (new ColumnDefinition { Width = new GridLength (3, GridUnitType.Absolute) });
+			boxGrid.ColumnDefinitions.Add (new ColumnDefinition { Width = new GridLength (1, GridUnitType.Absolute) });
+			boxGrid.ColumnDefinitions.Add (new ColumnDefinition { Width = new GridLength (4, GridUnitType.Absolute) });
+			boxGrid.ColumnDefinitions.Add (new ColumnDefinition { Width = new GridLength (1, GridUnitType.Absolute) });
+			boxGrid.ColumnDefinitions.Add (new ColumnDefinition { Width = new GridLength (4, GridUnitType.Absolute) });
+			boxGrid.ColumnDefinitions.Add (new ColumnDefinition { Width = new GridLength (1, GridUnitType.Absolute) });
+			boxGrid.ColumnDefinitions.Add (new ColumnDefinition { Width = new GridLength (4, GridUnitType.Absolute) });
+			boxGrid.ColumnDefinitions.Add (new ColumnDefinition { Width = new GridLength (1, GridUnitType.Absolute) });
+			boxGrid.ColumnDefinitions.Add (new ColumnDefinition { Width = new GridLength (4, GridUnitType.Absolute) });
+
+			//column with interval of 5 minutes
+			boxGrid.ColumnSpacing = 0;
+			boxGrid.RowSpacing = 0;
+
+
+			for (int k = 0; k < 10; k++) { 
+				//00
+				boxGrid.ColumnDefinitions.Add (new ColumnDefinition { Width = new GridLength (1, GridUnitType.Absolute) });
+				boxGrid.ColumnDefinitions.Add (new ColumnDefinition { Width = new GridLength (4, GridUnitType.Absolute) });
+				boxGrid.ColumnDefinitions.Add (new ColumnDefinition { Width = new GridLength (1, GridUnitType.Absolute) });
+				boxGrid.ColumnDefinitions.Add (new ColumnDefinition { Width = new GridLength (4, GridUnitType.Absolute) });
+				boxGrid.ColumnDefinitions.Add (new ColumnDefinition { Width = new GridLength (1, GridUnitType.Absolute) });
+				boxGrid.ColumnDefinitions.Add (new ColumnDefinition { Width = new GridLength (4, GridUnitType.Absolute) });
+				//15
+				boxGrid.ColumnDefinitions.Add (new ColumnDefinition { Width = new GridLength (1, GridUnitType.Absolute) });
+				boxGrid.ColumnDefinitions.Add (new ColumnDefinition { Width = new GridLength (4, GridUnitType.Absolute) });
+				boxGrid.ColumnDefinitions.Add (new ColumnDefinition { Width = new GridLength (1, GridUnitType.Absolute) });
+				boxGrid.ColumnDefinitions.Add (new ColumnDefinition { Width = new GridLength (4, GridUnitType.Absolute) });
+				boxGrid.ColumnDefinitions.Add (new ColumnDefinition { Width = new GridLength (1, GridUnitType.Absolute) });
+				boxGrid.ColumnDefinitions.Add (new ColumnDefinition { Width = new GridLength (4, GridUnitType.Absolute) });
+				//30
+				boxGrid.ColumnDefinitions.Add (new ColumnDefinition { Width = new GridLength (1, GridUnitType.Absolute) });
+				boxGrid.ColumnDefinitions.Add (new ColumnDefinition { Width = new GridLength (4, GridUnitType.Absolute) });
+				boxGrid.ColumnDefinitions.Add (new ColumnDefinition { Width = new GridLength (1, GridUnitType.Absolute) });
+				boxGrid.ColumnDefinitions.Add (new ColumnDefinition { Width = new GridLength (4, GridUnitType.Absolute) });
+				boxGrid.ColumnDefinitions.Add (new ColumnDefinition { Width = new GridLength (1, GridUnitType.Absolute) });
+				boxGrid.ColumnDefinitions.Add (new ColumnDefinition { Width = new GridLength (4, GridUnitType.Absolute) });
+				//45
+				boxGrid.ColumnDefinitions.Add (new ColumnDefinition { Width = new GridLength (1, GridUnitType.Absolute) });
+				boxGrid.ColumnDefinitions.Add (new ColumnDefinition { Width = new GridLength (4, GridUnitType.Absolute) });
+				boxGrid.ColumnDefinitions.Add (new ColumnDefinition { Width = new GridLength (1, GridUnitType.Absolute) });
+				boxGrid.ColumnDefinitions.Add (new ColumnDefinition { Width = new GridLength (4, GridUnitType.Absolute) });
+				boxGrid.ColumnDefinitions.Add (new ColumnDefinition { Width = new GridLength (1, GridUnitType.Absolute) });
+				boxGrid.ColumnDefinitions.Add (new ColumnDefinition { Width = new GridLength (4, GridUnitType.Absolute) });
+
+			} 
+
+			//6pm (243)
+			boxGrid.ColumnDefinitions.Add (new ColumnDefinition { Width = new GridLength (1, GridUnitType.Absolute) });
+			boxGrid.ColumnDefinitions.Add (new ColumnDefinition { Width = new GridLength (4, GridUnitType.Absolute) });
+			boxGrid.ColumnDefinitions.Add (new ColumnDefinition { Width = new GridLength (1, GridUnitType.Absolute) });
+			boxGrid.ColumnDefinitions.Add (new ColumnDefinition { Width = new GridLength (4, GridUnitType.Absolute) });
+			boxGrid.ColumnDefinitions.Add (new ColumnDefinition { Width = new GridLength (1, GridUnitType.Absolute) });
+			boxGrid.ColumnDefinitions.Add (new ColumnDefinition { Width = new GridLength (4, GridUnitType.Absolute) });
+			boxGrid.ColumnDefinitions.Add (new ColumnDefinition { Width = new GridLength (1, GridUnitType.Absolute) });
+			boxGrid.ColumnDefinitions.Add (new ColumnDefinition { Width = new GridLength (4, GridUnitType.Absolute) });
+			boxGrid.ColumnDefinitions.Add (new ColumnDefinition { Width = new GridLength (1, GridUnitType.Absolute) });
+			boxGrid.ColumnDefinitions.Add (new ColumnDefinition { Width = new GridLength (4, GridUnitType.Absolute) });
+			boxGrid.ColumnDefinitions.Add (new ColumnDefinition { Width = new GridLength (1, GridUnitType.Absolute) });
+			boxGrid.ColumnDefinitions.Add (new ColumnDefinition { Width = new GridLength (4, GridUnitType.Absolute) });
+			//spacing of 10 (244,245)
+			boxGrid.ColumnDefinitions.Add (new ColumnDefinition { Width = new GridLength (1, GridUnitType.Absolute) });
+			boxGrid.ColumnDefinitions.Add (new ColumnDefinition { Width = new GridLength (10, GridUnitType.Absolute) });
+
+			boxGrid.RowDefinitions.Add (new RowDefinition { Height = new GridLength (15, GridUnitType.Absolute) });
+
+			//Xamarin.Forms.Device.StartTimer (TimeSpan.FromSeconds(1), () => {
+
+			//refresh red box
+			if (date == "" || date == DateTime.Now.ToString ("yyyy-MMM-dd")) {
+				//boxRed.BackgroundColor = Color.Transparent;
+				Label b = new Label { BackgroundColor = Color.Red };
+
+				dateTiming = DateTime.Now.ToString ("hh.mm tt");
+				Label l = new Label {
+					Text = dateTiming,
+					TextColor = Color.Black,
+					FontSize = 9.5,
+					XAlign = TextAlignment.Center,
+					YAlign = TextAlignment.Center
+				};
+				//boxRed = b;
+
+				boxGrid.Children.Add (b, boxstart - 9, boxstart + 10, 0, 1);
+
+				//refresh label
+				//timeLabel.Text = "";
+
+				//timeLabel = l;
+
+				boxGrid.Children.Add (l, boxstart - 9, boxstart + 10, 0, 1);
+			}
+
+			//return true;
+			//});
 		}
+
+
 
 		public FacilityListingPage ()
 		{
 			InitializeComponent ();
+
 			GetFilters ();
 			addViewCell ();
 			//default filter**
@@ -990,119 +1106,6 @@ namespace FacilityReservationKiosk
 				this.SetValue (MasterDetailPage.IsPresentedProperty, (object)true);
 
 			GetFacilityTable ();
-
-			//box view grid
-			//create new rows and column for the grid
-			boxGrid.RowDefinitions = new RowDefinitionCollection ();
-			boxGrid.ColumnDefinitions = new ColumnDefinitionCollection ();
-
-			//create the columns
-			//0,1,2
-			boxGrid.ColumnDefinitions.Add (new ColumnDefinition { Width = new GridLength (1, GridUnitType.Absolute) });
-			boxGrid.ColumnDefinitions.Add (new ColumnDefinition { Width = new GridLength (1, GridUnitType.Absolute) });
-			boxGrid.ColumnDefinitions.Add (new ColumnDefinition { Width = new GridLength (1, GridUnitType.Star) });
-
-			boxGrid.ColumnDefinitions.Add (new ColumnDefinition { Width = new GridLength (1, GridUnitType.Absolute) });
-			boxGrid.ColumnDefinitions.Add (new ColumnDefinition { Width = new GridLength (3, GridUnitType.Absolute) });
-			boxGrid.ColumnDefinitions.Add (new ColumnDefinition { Width = new GridLength (1, GridUnitType.Absolute) });
-			boxGrid.ColumnDefinitions.Add (new ColumnDefinition { Width = new GridLength (3, GridUnitType.Absolute) });
-			boxGrid.ColumnDefinitions.Add (new ColumnDefinition { Width = new GridLength (1, GridUnitType.Absolute) });
-			boxGrid.ColumnDefinitions.Add (new ColumnDefinition { Width = new GridLength (4, GridUnitType.Absolute) });
-			boxGrid.ColumnDefinitions.Add (new ColumnDefinition { Width = new GridLength (1, GridUnitType.Absolute) });
-			boxGrid.ColumnDefinitions.Add (new ColumnDefinition { Width = new GridLength (4, GridUnitType.Absolute) });
-			boxGrid.ColumnDefinitions.Add (new ColumnDefinition { Width = new GridLength (1, GridUnitType.Absolute) });
-			boxGrid.ColumnDefinitions.Add (new ColumnDefinition { Width = new GridLength (4, GridUnitType.Absolute) });
-			boxGrid.ColumnDefinitions.Add (new ColumnDefinition { Width = new GridLength (1, GridUnitType.Absolute) });
-			boxGrid.ColumnDefinitions.Add (new ColumnDefinition { Width = new GridLength (4, GridUnitType.Absolute) });
-
-			//column with interval of 5 minutes
-			boxGrid.ColumnSpacing = 0;
-			boxGrid.RowSpacing = 0;
-
-
-			for (int k = 0; k < 10; k++) { 
-				//00
-				boxGrid.ColumnDefinitions.Add (new ColumnDefinition { Width = new GridLength (1, GridUnitType.Absolute) });
-				boxGrid.ColumnDefinitions.Add (new ColumnDefinition { Width = new GridLength (4, GridUnitType.Absolute) });
-				boxGrid.ColumnDefinitions.Add (new ColumnDefinition { Width = new GridLength (1, GridUnitType.Absolute) });
-				boxGrid.ColumnDefinitions.Add (new ColumnDefinition { Width = new GridLength (4, GridUnitType.Absolute) });
-				boxGrid.ColumnDefinitions.Add (new ColumnDefinition { Width = new GridLength (1, GridUnitType.Absolute) });
-				boxGrid.ColumnDefinitions.Add (new ColumnDefinition { Width = new GridLength (4, GridUnitType.Absolute) });
-				//15
-				boxGrid.ColumnDefinitions.Add (new ColumnDefinition { Width = new GridLength (1, GridUnitType.Absolute) });
-				boxGrid.ColumnDefinitions.Add (new ColumnDefinition { Width = new GridLength (4, GridUnitType.Absolute) });
-				boxGrid.ColumnDefinitions.Add (new ColumnDefinition { Width = new GridLength (1, GridUnitType.Absolute) });
-				boxGrid.ColumnDefinitions.Add (new ColumnDefinition { Width = new GridLength (4, GridUnitType.Absolute) });
-				boxGrid.ColumnDefinitions.Add (new ColumnDefinition { Width = new GridLength (1, GridUnitType.Absolute) });
-				boxGrid.ColumnDefinitions.Add (new ColumnDefinition { Width = new GridLength (4, GridUnitType.Absolute) });
-				//30
-				boxGrid.ColumnDefinitions.Add (new ColumnDefinition { Width = new GridLength (1, GridUnitType.Absolute) });
-				boxGrid.ColumnDefinitions.Add (new ColumnDefinition { Width = new GridLength (4, GridUnitType.Absolute) });
-				boxGrid.ColumnDefinitions.Add (new ColumnDefinition { Width = new GridLength (1, GridUnitType.Absolute) });
-				boxGrid.ColumnDefinitions.Add (new ColumnDefinition { Width = new GridLength (4, GridUnitType.Absolute) });
-				boxGrid.ColumnDefinitions.Add (new ColumnDefinition { Width = new GridLength (1, GridUnitType.Absolute) });
-				boxGrid.ColumnDefinitions.Add (new ColumnDefinition { Width = new GridLength (4, GridUnitType.Absolute) });
-				//45
-				boxGrid.ColumnDefinitions.Add (new ColumnDefinition { Width = new GridLength (1, GridUnitType.Absolute) });
-				boxGrid.ColumnDefinitions.Add (new ColumnDefinition { Width = new GridLength (4, GridUnitType.Absolute) });
-				boxGrid.ColumnDefinitions.Add (new ColumnDefinition { Width = new GridLength (1, GridUnitType.Absolute) });
-				boxGrid.ColumnDefinitions.Add (new ColumnDefinition { Width = new GridLength (4, GridUnitType.Absolute) });
-				boxGrid.ColumnDefinitions.Add (new ColumnDefinition { Width = new GridLength (1, GridUnitType.Absolute) });
-				boxGrid.ColumnDefinitions.Add (new ColumnDefinition { Width = new GridLength (4, GridUnitType.Absolute) });
-
-			} 
-
-			//6pm (243)
-			boxGrid.ColumnDefinitions.Add (new ColumnDefinition { Width = new GridLength (1, GridUnitType.Absolute) });
-			boxGrid.ColumnDefinitions.Add (new ColumnDefinition { Width = new GridLength (4, GridUnitType.Absolute) });
-			boxGrid.ColumnDefinitions.Add (new ColumnDefinition { Width = new GridLength (1, GridUnitType.Absolute) });
-			boxGrid.ColumnDefinitions.Add (new ColumnDefinition { Width = new GridLength (4, GridUnitType.Absolute) });
-			boxGrid.ColumnDefinitions.Add (new ColumnDefinition { Width = new GridLength (1, GridUnitType.Absolute) });
-			boxGrid.ColumnDefinitions.Add (new ColumnDefinition { Width = new GridLength (4, GridUnitType.Absolute) });
-			boxGrid.ColumnDefinitions.Add (new ColumnDefinition { Width = new GridLength (1, GridUnitType.Absolute) });
-			boxGrid.ColumnDefinitions.Add (new ColumnDefinition { Width = new GridLength (4, GridUnitType.Absolute) });
-			boxGrid.ColumnDefinitions.Add (new ColumnDefinition { Width = new GridLength (1, GridUnitType.Absolute) });
-			boxGrid.ColumnDefinitions.Add (new ColumnDefinition { Width = new GridLength (4, GridUnitType.Absolute) });
-			boxGrid.ColumnDefinitions.Add (new ColumnDefinition { Width = new GridLength (1, GridUnitType.Absolute) });
-			boxGrid.ColumnDefinitions.Add (new ColumnDefinition { Width = new GridLength (4, GridUnitType.Absolute) });
-			//spacing of 10 (244,245)
-			boxGrid.ColumnDefinitions.Add (new ColumnDefinition { Width = new GridLength (1, GridUnitType.Absolute) });
-			boxGrid.ColumnDefinitions.Add (new ColumnDefinition { Width = new GridLength (10, GridUnitType.Absolute) });
-
-			boxGrid.RowDefinitions.Add (new RowDefinition { Height = new GridLength (15, GridUnitType.Absolute) });
-
-			//Xamarin.Forms.Device.StartTimer (TimeSpan.FromSeconds(1), () => {
-
-				//refresh red box
-			if (date == DateTime.Now.ToString ("yyyy-MMM-dd") || date == "") {
-				boxRed.BackgroundColor = Color.Transparent;
-
-				Label b = new Label { BackgroundColor = Color.Red };
-
-				boxRed = b;
-
-				boxGrid.Children.Add (b, boxstart - 9, boxstart + 10, 0, 1);
-
-				//refresh label
-				timeLabel.Text = "";
-
-				dateTiming = DateTime.Now.ToString ("hh.mm tt");
-
-				Label l = new Label {
-					Text = dateTiming,
-					TextColor = Color.Black,
-					FontSize = 9.5,
-					XAlign = TextAlignment.Center,
-					YAlign = TextAlignment.Center
-				};
-
-				timeLabel = l;
-
-				boxGrid.Children.Add (l, boxstart - 9, boxstart + 10, 0, 1);
-			}
-
-				//return true;
-			//});
 		}
 	}
 }

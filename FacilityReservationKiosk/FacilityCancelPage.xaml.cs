@@ -60,7 +60,7 @@ namespace FacilityReservationKiosk
 			public List<Reservation> Reservations { get; set; }
 		}
 
-		public FacilityCancelPage (string passFacilityID, string reservationid)
+		public FacilityCancelPage (string passFacilityID, string reservationid, string datePass)
 		{
 			InitializeComponent ();
 
@@ -72,11 +72,15 @@ namespace FacilityReservationKiosk
 			string name = passFacilityID;
 			//yyyy-MMM-dd
 			//check with webservice to confirm format again
-			string date = "2015-AUG-13";
+			string date = datePass;
 
 			//Facility Reservation Kiosk Name
 			appName.Text = "Facility Reservation Kiosk";
 			appName.FontAttributes = FontAttributes.Bold;
+			var tapL = new TapGestureRecognizer ();
+			tapL.Tapped += (object sender, EventArgs e) => 
+				Navigation.PushModalAsync(new FacilityListingPage());
+			appName.GestureRecognizers.Add (tapL);
 
 			//set the label
 			//set based on filter***
@@ -554,7 +558,6 @@ namespace FacilityReservationKiosk
 			//entry input of reason
 			Entry cellInput = new Entry ();
 			resGrid.Children.Add (cellInput, 75, 205, 7, 8);
-			reason = cellInput.Text;
 
 			//usertype
 			resGrid.Children.Add (new Label {
@@ -605,6 +608,7 @@ namespace FacilityReservationKiosk
 
 				userID = inputID.Text;
 				password = inputPass.Text;
+				reason = cellInput.Text;
 
 				//check user
 				if (userID == "133332D" && password == "S9631672J") {
@@ -613,7 +617,7 @@ namespace FacilityReservationKiosk
 					//url
 					//facilityReservationID
 					string urlCancel = ConfigurationSettings.urliPad + "CancelReservation.aspx?UserID=" + userID
-						+ "&FacilityReservationID=" + "2015B0030989" + "&Reason=" + reason;
+						+ "&FacilityReservationID=" + facilityReservationID + "&Reason=" + reason;
 
 					//to get all the reservations and insert to an c# object
 					using (var client3 = new HttpClient ()) {

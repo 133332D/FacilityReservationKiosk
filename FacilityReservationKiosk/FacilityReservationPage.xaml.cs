@@ -85,7 +85,7 @@ namespace FacilityReservationKiosk
 		}
 
 		//boxNum pass in ID
-		public FacilityReservationPage (string passFacilityID, string boxNum)
+		public FacilityReservationPage (string passFacilityID, string boxNum, string datePass)
 		{
 			InitializeComponent ();
 
@@ -97,16 +97,21 @@ namespace FacilityReservationKiosk
 			string name = passFacilityID;
 			//yyyy-MMM-dd
 			//check with webservice to confirm format again
-			string date = "2015-AUG-13";
+			string date = datePass;
 
 			//Facility Reservation Kiosk Name
 			appName.Text = "Facility Reservation Kiosk";
 			appName.FontAttributes = FontAttributes.Bold;
+			var tapL = new TapGestureRecognizer ();
+			tapL.Tapped += (object sender, EventArgs e) => 
+				Navigation.PushModalAsync(new FacilityListingPage());
+			appName.GestureRecognizers.Add (tapL);
 
 			//set the label
 			//set based on filter***
 			title.Text = " \n" + "Facility Reservation";
 			title.FontAttributes = FontAttributes.Bold;
+
 
 			//filter button to filter the list of facility
 			arrowButton.Image = "Left Arrow-50.png";
@@ -863,14 +868,11 @@ namespace FacilityReservationKiosk
 				FontSize = 20
 			}, 27, 75, 3, 4);
 			DatePicker pickerDate = new DatePicker {
-				MinimumDate = DateTime.Today,
+				MinimumDate = Convert.ToDateTime(datePass),
 				MaximumDate = DateTime.Today.AddMonths (1),
 				Format = "dd-MMM-yyyy"
 			};
 			resGrid.Children.Add (pickerDate, 75, 123, 3, 4);
-
-			sDate = pickerDate.Date.ToString ("dd-MMM-yyyy");
-			eDate = pickerDate.Date.ToString ("dd-MMM-yyyy");
 
 			//from time label
 			resGrid.Children.Add (new Label {
@@ -902,7 +904,6 @@ namespace FacilityReservationKiosk
 			//entry input of purpose
 			Entry cellInput = new Entry ();
 			resGrid.Children.Add (cellInput, 75, 210, 7, 8);
-			purpose = cellInput.Text;
 
 			//usertype
 			resGrid.Children.Add (new Label {
@@ -963,15 +964,17 @@ namespace FacilityReservationKiosk
 			resGrid.Children.Add (totimepick, 173, 210, 5, 6);
 			etime = totimepick.Time.ToString ();
 
-			startDateTime = Convert.ToDateTime (sDate + " " + stime).ToString ("dd-MMM-yyyy HH:mm");
-			endDateTime = Convert.ToDateTime (eDate + " " + etime).ToString("dd-MMM-yyyy HH:mm");
-
 			//button
 			Button bookBut = new Button { Text="Confirm", BackgroundColor = Color.White };
 			bookBut.Clicked += (object sender, EventArgs e) => 
 			{
+				sDate = pickerDate.Date.ToString ("dd-MMM-yyyy");
+				eDate = pickerDate.Date.ToString ("dd-MMM-yyyy");
 				userID = inputID.Text;
 				password = inputPass.Text;
+				purpose = cellInput.Text;
+				startDateTime = Convert.ToDateTime (sDate + " " + stime).ToString ("dd-MMM-yyyy HH:mm");
+				endDateTime = Convert.ToDateTime (eDate + " " + etime).ToString("dd-MMM-yyyy HH:mm");
 
 				if (userID == "133332D" && password == "S9631672J") {
 					string status;
@@ -980,7 +983,7 @@ namespace FacilityReservationKiosk
 					//url
 					//passFacilityID startDateTime endDateTime
 					string urlMake = ConfigurationSettings.urliPad + "CreateReservation.aspx?UserType=" + "&UserID=" + userID
-						+ "&FacilityID=" + "L.403" + "&StartDateTime=" + "18-Nov-2015 16:00" + "&EndDateTime=" + "18-Nov-2015 17:00"
+						+ "&FacilityID="+ passFacilityID + "&StartDateTime=" + startDateTime + "&EndDateTime=" + endDateTime
 						+ "&Description=" + purpose;
 
 					//to get all the reservations and insert to an c# object
@@ -998,11 +1001,11 @@ namespace FacilityReservationKiosk
 					}
 					if (status == "OK") {
 						DisplayAlert ("Reservation", "Booking was sucessful!", "OK");
-						Navigation.PushModalAsync(new FacilityListingPage());
+							Navigation.PushModalAsync(new FacilityListingPage());
 
 					} else {
 						DisplayAlert ("Error", message, "OK");
-						Navigation.PopModalAsync(true);
+						Navigation.PopModalAsync (true);
 					}	
 				}
 			};
