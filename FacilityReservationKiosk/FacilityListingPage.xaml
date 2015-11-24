@@ -1,5 +1,7 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<MasterDetailPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="FacilityReservationKiosk.FacilityListingPage">
+<MasterDetailPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+x:Class="FacilityReservationKiosk.FacilityListingPage"
+xmlns:local="clr-namespace:FacilityReservationKiosk;assembly=FacilityReservationKiosk">
 	<MasterDetailPage.Master>
 		<ContentPage x:Name="master" Title="Master" BackgroundColor="White" Padding="0, 20, 0, 0">
 			<!--Master Page-->
@@ -405,7 +407,7 @@
 				<!--create a list of facility and loop with each gridview-->
 				<!--to show the bookings of each facility-->
 				<ScrollView>
-					<Grid x:Name="facGrid">
+					<local:FastGrid x:Name="facGrid">
 						<Grid.ColumnDefinitions>
 						</Grid.ColumnDefinitions>
 						<Grid.RowDefinitions>
@@ -413,7 +415,7 @@
 						<!--add rows and children in FacilityListingPage.xaml.cs -->
 						<Grid.Children>
 						</Grid.Children>
-					</Grid>
+					</local:FastGrid>
 				</ScrollView>
 <!--				<ActivityIndicator x:Name = "activityIndicator" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"/>-->
 			</StackLayout>

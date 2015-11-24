@@ -1108,6 +1108,20 @@ namespace FacilityReservationKiosk
 			GetFacilityTable ();
 		}
 	}
+
+
+	public class FastGrid : Grid
+	{
+		protected override bool ShouldInvalidateOnChildAdded (View child)
+		{
+			return false;
+		}
+
+		protected override bool ShouldInvalidateOnChildRemoved (View child)
+		{
+			return false;
+		}
+	}
 }
 
 

@@ -1,5 +1,8 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="FacilityReservationKiosk.FacilityDetailsPage" BackgroundColor="White" Padding="0, 20, 0, 0">
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="FacilityReservationKiosk.FacilityDetailsPage" 
+BackgroundColor="White" Padding="0, 20, 0, 0"
+>
 	<ContentPage.Content>
 		<StackLayout>
 			<!--top header-->
