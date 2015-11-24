@@ -956,7 +956,6 @@ namespace FacilityReservationKiosk
 				Time = timeFrom
 			};
 			resGrid.Children.Add (timepick, 75, 112, 5, 6);
-			stime = timepick.Time.ToString ();
 
 			//to time
 			TimePicker totimepick = new TimePicker {
@@ -964,7 +963,6 @@ namespace FacilityReservationKiosk
 				Time = timeTo
 			};
 			resGrid.Children.Add (totimepick, 173, 210, 5, 6);
-			etime = totimepick.Time.ToString ();
 
 			//button
 			Button bookBut = new Button { Text="Confirm", BackgroundColor = Color.White };
@@ -975,6 +973,8 @@ namespace FacilityReservationKiosk
 				userID = inputID.Text;
 				password = inputPass.Text;
 				purpose = cellInput.Text;
+				stime = timepick.Time.ToString ();
+				etime = totimepick.Time.ToString ();
 				startDateTime = Convert.ToDateTime (sDate + " " + stime).ToString ("dd-MMM-yyyy HH:mm");
 				endDateTime = Convert.ToDateTime (eDate + " " + etime).ToString("dd-MMM-yyyy HH:mm");
 
@@ -1023,7 +1023,7 @@ namespace FacilityReservationKiosk
 		public async void ShowAlert(string title, string message, string button)
 		{
 			await DisplayAlert (title, message, button);
-			awaitNavigation.PushModalAsync(new FacilityListingPage());
+			await Navigation.PushModalAsync(new FacilityListingPage());
 		}
 	}
 }

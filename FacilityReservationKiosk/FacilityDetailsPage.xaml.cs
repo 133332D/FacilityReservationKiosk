@@ -230,7 +230,7 @@ namespace FacilityReservationKiosk
 				Label desc;
 				desc = new Label { TextColor = Color.Black };
 				timeline.Children.Add (desc, 2, i + 2);
-				desc.Text = reservationList [i].useDescription;
+				desc.Text = reservationList[i].useShortDescription + " " + reservationList [i].useDescription;
 				desc.FontAttributes = FontAttributes.Bold;
 			}
 
