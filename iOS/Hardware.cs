@@ -86,10 +86,9 @@ namespace FacilityReservationKiosk.iOS
 			var documentsPath = Environment.GetFolderPath (Environment.SpecialFolder.Personal);
 			var filePath = Path.Combine (documentsPath, publicKeyFileName);
 
-			//System.IO.File.Delete(filePath);
 			//Check if public key pairs have been generated
 			if (File.Exists (filePath)) {
-
+				
 				//Loading public key pair from file 
 				filePath = Path.Combine (documentsPath, publicKeyFileName);
 				publickey = System.IO.File.ReadAllText (filePath);

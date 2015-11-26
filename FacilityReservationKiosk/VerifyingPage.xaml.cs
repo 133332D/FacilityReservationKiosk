@@ -25,14 +25,19 @@ namespace FacilityReservationKiosk
 				json2.Wait ();
 
 				string jsonString = json2.Result.ToString ();
-				var obj = JObject.Parse (jsonString);
-				status = (string)obj.SelectToken ("Result");
-				message = (string)obj.SelectToken ("Message");
+
+				if (jsonString == null || jsonString == "") {
+					Navigation.PushModalAsync(new FacilityListingPage());
+				} else {
+					var obj = JObject.Parse (jsonString);
+					status = (string)obj.SelectToken ("Result");
+					message = (string)obj.SelectToken ("Message");
 
 
-				test.Text = status + " " + message;
+					test.Text = status + " " + message;
 
-				DisplayAlert ("Verify IPad", message, "OK");
+					DisplayAlert ("Verify IPad", message, "OK");
+				}
 			}
 		}
 	}

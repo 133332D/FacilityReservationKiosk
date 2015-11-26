@@ -314,7 +314,7 @@ namespace FacilityReservationKiosk
 					string text;
 					if (reservationList [j].useShortDescription == null) {
 						string temptext = reservationList [j].useDescription;
-						string str = temptext.Substring (0, 4);
+						string str = temptext.Substring (0, 6);
 						text = str;
 					} else {
 						text = reservationList [j].useShortDescription;
@@ -982,7 +982,7 @@ namespace FacilityReservationKiosk
 				startDateTime = Convert.ToDateTime (sDate + " " + stime).ToString ("dd-MMM-yyyy HH:mm");
 				endDateTime = Convert.ToDateTime (eDate + " " + etime).ToString("dd-MMM-yyyy HH:mm");
 
-				if (userID == "133332D" && password == "S9631672J") {
+				if (userID == "133332D" && password == "12345") {
 					string status;
 					string message;
 

@@ -15,6 +15,30 @@ namespace FacilityReservationKiosk
 		string reason;
 		string password;
 
+		static string eight = "08:00:00";
+		static string nine = "09:00:00";
+		static string ten = "10:00:00";
+		static string eleven = "11:00:00";
+		static string twelve = "12:00:00";
+		static string thirteen = "13:00:00";
+		static string fourteen = "14:00:00";
+		static string fifteen = "15:00:00";
+		static string sixteen = "16:00:00";
+		static string seventeen = "17:00:00";
+		static string eighteen = "18:00:00";
+
+		TimeSpan eighttime = Convert.ToDateTime(eight).TimeOfDay;
+		TimeSpan ninetime = Convert.ToDateTime(nine).TimeOfDay;
+		TimeSpan tentime = Convert.ToDateTime(ten).TimeOfDay;
+		TimeSpan eleventime = Convert.ToDateTime(eleven).TimeOfDay;
+		TimeSpan twelvetime = Convert.ToDateTime(twelve).TimeOfDay;
+		TimeSpan thirteentime = Convert.ToDateTime(thirteen).TimeOfDay;
+		TimeSpan fourteentime = Convert.ToDateTime(fourteen).TimeOfDay;
+		TimeSpan fifteentime = Convert.ToDateTime(fifteen).TimeOfDay;
+		TimeSpan sixteentime = Convert.ToDateTime(sixteen).TimeOfDay;
+		TimeSpan seventeentime = Convert.ToDateTime(seventeen).TimeOfDay;
+		TimeSpan eighteentime = Convert.ToDateTime(eighteen).TimeOfDay;
+
 		class ResObject
 		{
 			public string facilityReservationID { get; set; }
@@ -285,7 +309,7 @@ namespace FacilityReservationKiosk
 					string text;
 					if (reservationList [j].useShortDescription == null) {
 						string temptext = reservationList [j].useDescription;
-						string str = temptext.Substring (0, 4);
+						string str = temptext.Substring (0, 6);
 						text = str;
 					} else {
 						text = reservationList [j].useShortDescription;
@@ -367,6 +391,56 @@ namespace FacilityReservationKiosk
 						}, 173, 210, 5, 6);
 
 						facilityReservationID = reservationList [j].facilityReservationID;
+
+						if ((reservationList [j].startDateTime.TimeOfDay >= eighttime
+						   && reservationList [j].startDateTime.TimeOfDay < ninetime)) {
+							resGrid.Children.Add (new Image { Source = "arrowg.png" }, 3, 27, 0, 1);
+						}
+
+						if ((reservationList [j].startDateTime.TimeOfDay >= ninetime
+							&& reservationList [j].startDateTime.TimeOfDay < tentime)) {
+							resGrid.Children.Add (new Image { Source = "arrowg.png" }, 27, 51, 0, 1);
+						}
+
+						if ((reservationList [j].startDateTime.TimeOfDay >= tentime
+							&& reservationList [j].startDateTime.TimeOfDay < eleventime)) {
+							resGrid.Children.Add (new Image { Source = "arrowg.png" }, 51, 75, 0, 1);
+						}
+
+						if ((reservationList [j].startDateTime.TimeOfDay >= eleventime
+							&& reservationList [j].startDateTime.TimeOfDay < twelvetime)) {
+							resGrid.Children.Add (new Image { Source = "arrowg.png" }, 75, 99, 0, 1);
+						}
+
+						if ((reservationList [j].startDateTime.TimeOfDay >= twelvetime
+							&& reservationList [j].startDateTime.TimeOfDay < thirteentime)) {
+							resGrid.Children.Add (new Image { Source = "arrowg.png" }, 99, 123, 0, 1);
+						}
+
+						if ((reservationList [j].startDateTime.TimeOfDay >= thirteentime
+							&& reservationList [j].startDateTime.TimeOfDay < fourteentime)) {
+							resGrid.Children.Add (new Image { Source = "arrowg.png" }, 123, 147, 0, 1);
+						}
+
+						if ((reservationList [j].startDateTime.TimeOfDay >= fourteentime
+							&& reservationList [j].startDateTime.TimeOfDay < fifteentime)) {
+							resGrid.Children.Add (new Image { Source = "arrowg.png" }, 147, 171, 0, 1);
+						}
+
+						if ((reservationList [j].startDateTime.TimeOfDay >= fifteentime
+							&& reservationList [j].startDateTime.TimeOfDay < sixteentime)) {
+							resGrid.Children.Add (new Image { Source = "arrowg.png" }, 171, 195, 0, 1);
+						}
+
+						if ((reservationList [j].startDateTime.TimeOfDay >= sixteentime
+							&& reservationList [j].startDateTime.TimeOfDay < seventeentime)) {
+							resGrid.Children.Add (new Image { Source = "arrowg.png" }, 195, 219, 0, 1);
+						}
+
+						if ((reservationList [j].startDateTime.TimeOfDay >= seventeentime
+							&& reservationList [j].startDateTime.TimeOfDay < eighteentime)) {
+							resGrid.Children.Add (new Image { Source = "arrowg.png" }, 219, 243, 0, 1);
+						}
 					}
 
 				}	
@@ -508,9 +582,6 @@ namespace FacilityReservationKiosk
 				}, boxstart - 9, boxstart + 10, 0, 1);
 			}
 
-			//write if else or switch to set position of arrow
-			resGrid.Children.Add (new Image { Source = "arrowg.png" }, 3, 27, 0, 1);
-
 			// add in label and textboxes to make new reservation
 			resGrid.Children.Add (new Label {
 				TextColor = Color.Black,
@@ -615,7 +686,7 @@ namespace FacilityReservationKiosk
 				reason = cellInput.Text;
 
 				//check user
-				if (userID == "133332D" && password == "S9631672J") {
+				if (userID == "133332D" && password == "12345") {
 					string status;
 					string message;
 					//url

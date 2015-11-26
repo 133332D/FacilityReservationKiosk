@@ -554,7 +554,7 @@ namespace FacilityReservationKiosk
 						if (reservationList [j].useShortDescription == null) {
 
 							string temptext = reservationList [j].useDescription;
-							string str = temptext.Substring (0, 4);
+							string str = temptext.Substring (0, 6);
 							text = str;
 
 						} else {
@@ -1091,7 +1091,7 @@ namespace FacilityReservationKiosk
 				checkmark1415.Opacity = 0;
 				checkmark1516.Opacity = 0;
 				checkmark1617.Opacity = 0;
-				checkmark1718.Opacity = 1;
+				checkmark1718.Opacity = 0;
 				availability = "";
 				GetFacilityTable ();
 				this.SetValue(MasterDetailPage.IsPresentedProperty,(object) false);
