@@ -309,7 +309,9 @@ namespace FacilityReservationKiosk
 					string text;
 					if (reservationList [j].useShortDescription == null) {
 						string temptext = reservationList [j].useDescription;
-						string str = temptext.Substring (0, 6);
+						string str = temptext;
+						if (temptext.Length > 6)
+							temptext.Substring (0, 6);
 						text = str;
 					} else {
 						text = reservationList [j].useShortDescription;

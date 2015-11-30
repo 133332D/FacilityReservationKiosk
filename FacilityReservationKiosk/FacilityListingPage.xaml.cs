@@ -549,12 +549,14 @@ namespace FacilityReservationKiosk
 					//booking reserved
 					//break if facilityID dont match
 					if (reservationList [j].facilityID == facilityList [i].facilityID) {
+						string text = "";
 
-						string text;
 						if (reservationList [j].useShortDescription == null) {
 
 							string temptext = reservationList [j].useDescription;
-							string str = temptext.Substring (0, 6);
+							string str = temptext;
+							if (temptext.Length > 6)
+								temptext.Substring (0, 6);
 							text = str;
 
 						} else {
@@ -618,7 +620,6 @@ namespace FacilityReservationKiosk
 							BackgroundColor = Color.Silver
 						};
 						facGrid.Children.Add (labelRes, start, end, (i * 2) + 1, (i * 2) + 2);
-
 						/*
 						Image imageArrow;
 						imageArrow = new Image { Source = ImageSource.FromFile("arrowg.png") };
@@ -645,6 +646,8 @@ namespace FacilityReservationKiosk
 							//imageArrow.Opacity = 1;
 						};
 						labelRes.GestureRecognizers.Add (tapDes);
+		
+
 					}
 
 
@@ -708,7 +711,8 @@ namespace FacilityReservationKiosk
 
 				boxLine = bl;
 
-				facGrid.Children.Add (bl, linestart, linestart + 1, 0, ((facilityList.Count - 1) * 2) + 3);
+				if (linestart >= 0)
+					facGrid.Children.Add (bl, linestart, linestart + 1, 0, ((facilityList.Count - 1) * 2) + 3);
 			}
 
 //			activityIndicator.IsRunning = false;
